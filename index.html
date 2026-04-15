@@ -58,43 +58,10 @@ body::before {
   z-index: 9999;
 }
 
-/* GOLD TITLE (UPGRADED) */
-.navbar h2 {
-  font-size: 22px;
-  letter-spacing: 5px;
-  font-weight: 900;
-  text-transform: uppercase;
-
-  background: linear-gradient(90deg,#b8860b,#ffd700,#fff2a6,#ffd700,#b8860b);
-  background-size: 300% 100%;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-
-  animation: goldShine 4s linear infinite, goldIntro 1.2s ease forwards;
-  text-shadow: 0 0 12px rgba(255,215,0,0.25);
-}
-
-@keyframes goldShine {
-  0% { background-position: 0% 50%; }
-  100% { background-position: 300% 50%; }
-}
-
-@keyframes goldIntro {
-  0% { opacity: 0; transform: translateY(-10px); }
-  100% { opacity: 1; transform: translateY(0); }
-}
-
-/* NAV LINKS */
 .menu-toggle {
   font-size: 26px;
   cursor: pointer;
   color: #ffd700;
-  transition: 0.2s;
-}
-
-.menu-toggle:hover {
-  transform: scale(1.1);
-  text-shadow: 0 0 10px #ffd700;
 }
 
 .nav-links {
@@ -114,11 +81,6 @@ body::before {
   padding: 12px;
   color: #ffd700;
   text-decoration: none;
-  transition: 0.2s;
-}
-
-.nav-links a:hover {
-  background: rgba(255,215,0,0.1);
 }
 
 /* FADE SYSTEM */
@@ -163,7 +125,7 @@ body::before {
 }
 
 .hero p {
-  color: #c9b37a;
+  color: #bbb;
 }
 
 /* SECTION */
@@ -179,7 +141,7 @@ body::before {
   margin-bottom: 25px;
 }
 
-/* FEATURE BOXES (UPGRADED BROADCAST CARDS) */
+/* FEATURE BOXES */
 .featured-box {
   background: linear-gradient(135deg, rgba(255,215,0,0.12), rgba(0,0,0,0.7));
   border: 1px solid rgba(255,215,0,0.25);
@@ -188,39 +150,34 @@ body::before {
   text-align: center;
   position: relative;
   overflow: hidden;
-  animation: popIn 1s ease forwards, pulseGlow 3s infinite;
   transition: 0.4s ease;
 }
 
-/* shimmer */
-.featured-box::before {
-  content: "";
+/* ===== FEATURED UPGRADE ONLY ===== */
+.featured-box.featured-highlight {
+  border: 2px solid #ffd700;
+  box-shadow: 0 0 35px rgba(255, 215, 0, 0.35);
+  animation: featuredGlow 2.5s infinite;
+}
+
+@keyframes featuredGlow {
+  0%,100% { box-shadow: 0 0 25px rgba(255,215,0,0.25); }
+  50% { box-shadow: 0 0 60px rgba(255,215,0,0.55); }
+}
+
+/* SHINY BADGE */
+.featured-badge {
   position: absolute;
-  top: 0;
-  left: -120%;
-  width: 60%;
-  height: 100%;
-  background: linear-gradient(120deg,transparent,rgba(255,215,0,0.25),transparent);
-  transform: skewX(-20deg);
-  animation: shimmer 4s infinite;
-}
-
-@keyframes shimmer {
-  0% { left: -120%; }
-  100% { left: 120%; }
-}
-
-.featured-box:hover {
-  transform: translateY(-8px) scale(1.02);
-  box-shadow: 0 0 60px rgba(255,215,0,0.35);
-}
-
-@keyframes popIn {
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes pulseGlow {
-  50% { box-shadow: 0 0 45px rgba(255,215,0,0.30); }
+  top: 10px;
+  left: 10px;
+  background: linear-gradient(90deg, #b8860b, #ffd700, #fff2a6);
+  color: black;
+  font-weight: bold;
+  font-size: 12px;
+  padding: 5px 10px;
+  border-radius: 8px;
+  letter-spacing: 1px;
+  box-shadow: 0 0 12px rgba(255,215,0,0.4);
 }
 
 /* LEADERBOARD */
@@ -236,14 +193,16 @@ body::before {
   justify-content: space-between;
   padding: 14px 18px;
   border-bottom: 1px solid rgba(255,215,0,0.08);
-  transition: 0.2s;
 }
 
 .row:hover {
   background: rgba(255,215,0,0.06);
 }
 
-/* BUTTONS */
+.rank { color: #ffd700; width: 30px; }
+.team { flex: 1; }
+.points { color: #ccc; }
+
 .join-btn, .show-btn {
   display: inline-block;
   padding: 14px 30px;
@@ -281,45 +240,25 @@ body::before {
   border: 1px solid rgba(255,215,0,0.25);
   width: 90%;
   max-width: 450px;
+  max-height: 70vh;
+  overflow-y: auto;
 }
 
-/* =======================
-   RESPONSIVE FIX (NO LAYOUT CHANGE)
-   ======================= */
-@media (max-width: 768px) {
+.overlay-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: 1px solid rgba(255,215,0,0.1);
+}
 
-  .hero {
-    padding: 80px 15px;
-  }
-
-  .hero h2 {
-    font-size: 28px;
-  }
-
-  .hero img {
-    width: 180px;
-  }
-
-  .section {
-    padding: 40px 15px;
-  }
-
-  .featured-box {
-    padding: 16px;
-  }
-
-  .navbar {
-    padding: 12px 16px;
-  }
-
-  .nav-links {
-    width: 90vw;
-    right: 5%;
-  }
-
-  .row {
-    font-size: 14px;
-  }
+.close-btn {
+  margin-top: 15px;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 10px;
+  background: #ffd700;
+  font-weight: bold;
+  cursor: pointer;
 }
 </style>
 </head>
@@ -342,14 +281,22 @@ body::before {
   <p>Where Tier 3 talent rises to the top.</p>
 </div>
 
+<!-- MATCH OF THE WEEK (UPDATED ONLY) -->
 <div class="section fade delay-2">
   <h2>Match of the Week</h2>
-  <div class="featured-box">Phantom vs Eclipse — Sunday 8PM EST</div>
+  <div class="featured-box featured-highlight">
+    <div class="featured-badge">FEATURED</div>
+    Phantom vs Eclipse — Sunday 8PM EST
+  </div>
 </div>
 
+<!-- PLAYER OF THE WEEK (UPDATED ONLY) -->
 <div class="section fade delay-2">
   <h2>Player of the Week</h2>
-  <div class="featured-box">AceStorm — 38 Kills MVP Performance</div>
+  <div class="featured-box featured-highlight">
+    <div class="featured-badge">FEATURED</div>
+    AceStorm — 38 Kills MVP Performance
+  </div>
 </div>
 
 <div class="section fade delay-3">
@@ -392,9 +339,7 @@ const teams = {
 function renderTop4() {
   const board = document.getElementById("leaderboard");
   board.innerHTML = "";
-  Object.entries(teams)
-    .sort((a,b)=>b[1]-a[1])
-    .slice(0,4)
+  Object.entries(teams).sort((a,b)=>b[1]-a[1]).slice(0,4)
     .forEach((t,i)=>{
       board.innerHTML += `
         <div class="row">
@@ -409,17 +354,15 @@ function renderTop4() {
 function openBoard() {
   const full = document.getElementById("fullBoard");
   full.innerHTML = "";
-  Object.entries(teams)
-    .sort((a,b)=>b[1]-a[1])
-    .forEach((t,i)=>{
-      full.innerHTML += `
-        <div class="overlay-row">
-          <div>${i+1}</div>
-          <div>${t[0]}</div>
-          <div>${t[1]} pts</div>
-        </div>
-      `;
-    });
+  Object.entries(teams).sort((a,b)=>b[1]-a[1]).forEach((t,i)=>{
+    full.innerHTML += `
+      <div class="overlay-row">
+        <div>${i+1}</div>
+        <div>${t[0]}</div>
+        <div>${t[1]} pts</div>
+      </div>
+    `;
+  });
   document.getElementById("overlay").style.display = "flex";
 }
 

@@ -44,7 +44,8 @@ body::before {
   50% { transform: translate(2%, -2%); }
 }
 
-/* NAV */
+/* ================= NAV ================= */
+
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -52,66 +53,46 @@ body::before {
   padding: 18px 26px;
   position: sticky;
   top: 0;
-  background: rgba(10,10,10,0.92);
-  backdrop-filter: blur(18px);
-  border-bottom: 1px solid rgba(255,215,0,0.22);
+  background: rgba(10,10,10,0.92); /* FIXED (less transparent) */
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255,215,0,0.25);
   z-index: 9999;
 }
 
-/* =========================
-   OLYMPUS GOLD SWEEP INTRO
-   ========================= */
 .navbar h2 {
-  font-size: 22px;
-  letter-spacing: 5px;
-  font-weight: 900;
-  text-transform: uppercase;
-  position: relative;
-  display: inline-block;
+  font-size: 20px;
+  letter-spacing: 3px;
+  font-weight: 800;
 
-  background: linear-gradient(
-    90deg,
-    #b8860b,
-    #ffd700,
-    #fff2a6,
-    #ffd700,
-    #b8860b
-  );
+  /* GOLD TEXT STYLE */
+  background: linear-gradient(90deg, #ffd700, #ffb300, #fff2a6, #ffd700);
   background-size: 300% 100%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 
-  animation: goldShine 4s linear infinite, goldIntro 1.2s ease forwards;
-  opacity: 0;
-
-  text-shadow: 0 0 12px rgba(255, 215, 0, 0.25);
+  animation: goldSweep 6s linear infinite;
 }
 
-/* moving gold shine */
-@keyframes goldShine {
+/* ================= GOLD SWEEP ================= */
+
+@keyframes goldSweep {
   0% { background-position: 0% 50%; }
   100% { background-position: 300% 50%; }
 }
 
-/* intro fade + sweep feel */
-@keyframes goldIntro {
-  0% {
-    opacity: 0;
-    transform: translateY(-10px);
-    filter: brightness(0.5);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-    filter: brightness(1);
-  }
+/* GLOBAL GOLD TEXT OPTION */
+h2, h3, .team, .rank {
+  background: linear-gradient(90deg, #ffd700, #ffb300, #fff2a6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-/* NAV LINKS */
+/* MENU */
 .menu-toggle {
   font-size: 26px;
   cursor: pointer;
   color: #ffd700;
+  z-index: 10000;
 }
 
 .nav-links {
@@ -152,7 +133,9 @@ body::before {
 /* HERO */
 .hero {
   text-align: center;
-  padding: 120px 20px 90px;
+  padding: 110px 20px 90px; /* FIX: space so logo never hits nav */
+  position: relative;
+  z-index: 1;
 }
 
 .hero img {
@@ -169,15 +152,6 @@ body::before {
   50% { filter: drop-shadow(0 0 50px gold); }
 }
 
-.hero h2 {
-  font-size: 44px;
-  color: #ffd700;
-}
-
-.hero p {
-  color: #bbb;
-}
-
 /* SECTION */
 .section {
   padding: 60px 20px;
@@ -187,7 +161,6 @@ body::before {
 
 .section h2 {
   text-align: center;
-  color: #ffd700;
   margin-bottom: 25px;
 }
 
@@ -206,6 +179,7 @@ body::before {
   transition: 0.4s ease;
 }
 
+/* SHIMMER */
 .featured-box::before {
   content: "";
   position: absolute;
@@ -213,19 +187,13 @@ body::before {
   left: -120%;
   width: 60%;
   height: 100%;
-  background: linear-gradient(
-    120deg,
-    transparent,
-    rgba(255,215,0,0.25),
-    transparent
-  );
+  background: linear-gradient(120deg, transparent, rgba(255,215,0,0.25), transparent);
   transform: skewX(-20deg);
   animation: shimmer 4s infinite;
 }
 
 @keyframes shimmer {
   0% { left: -120%; }
-  50% { left: 120%; }
   100% { left: 120%; }
 }
 
@@ -239,7 +207,6 @@ body::before {
 
 .featured-box:hover {
   transform: translateY(-8px) scale(1.02);
-  box-shadow: 0 0 60px rgba(255,215,0,0.35);
 }
 
 /* LEADERBOARD */
@@ -261,10 +228,11 @@ body::before {
   background: rgba(255,215,0,0.06);
 }
 
-.rank { color: #ffd700; width: 30px; }
+.rank { width: 30px; }
 .team { flex: 1; }
 .points { color: #ccc; }
 
+/* BUTTONS */
 .join-btn, .show-btn {
   display: inline-block;
   padding: 14px 30px;
@@ -302,8 +270,6 @@ body::before {
   border: 1px solid rgba(255,215,0,0.25);
   width: 90%;
   max-width: 450px;
-  max-height: 70vh;
-  overflow-y: auto;
 }
 
 .overlay-row {
@@ -356,22 +322,11 @@ body::before {
 <div class="section fade delay-3">
   <h2>Standings</h2>
   <div class="leaderboard" id="leaderboard"></div>
-  <div style="text-align:center;">
-    <button class="show-btn" onclick="openBoard()">Show Full Standings</button>
-  </div>
 </div>
 
 <div class="section fade delay-4" style="text-align:center;">
   <h2>Join Olympus</h2>
-  <a class="join-btn" href="https://discord.gg/2xsKgrESJ">Join Discord</a>
-</div>
-
-<div class="overlay" id="overlay">
-  <div class="overlay-content">
-    <h2 style="color:#ffd700;">Full Standings</h2>
-    <div id="fullBoard"></div>
-    <button class="close-btn" onclick="closeBoard()">Close</button>
-  </div>
+  <a class="join-btn" href="#">Join Discord</a>
 </div>
 
 <script>
@@ -393,7 +348,10 @@ const teams = {
 function renderTop4() {
   const board = document.getElementById("leaderboard");
   board.innerHTML = "";
-  Object.entries(teams).sort((a,b)=>b[1]-a[1]).slice(0,4)
+
+  Object.entries(teams)
+    .sort((a,b)=>b[1]-a[1])
+    .slice(0,4)
     .forEach((t,i)=>{
       board.innerHTML += `
         <div class="row">
@@ -403,29 +361,6 @@ function renderTop4() {
         </div>
       `;
     });
-}
-
-function openBoard() {
-  const full = document.getElementById("fullBoard");
-  full.innerHTML = "";
-  Object.entries(teams).sort((a,b)=>b[1]-a[1]).forEach((t,i)=>{
-    full.innerHTML += `
-      <div class="overlay-row">
-        <div>${i+1}</div>
-        <div>${t[0]}</div>
-        <div>${t[1]} pts</div>
-      </div>
-    `;
-  });
-  document.getElementById("overlay").style.display = "flex";
-}
-
-function closeBoard() {
-  document.getElementById("overlay").style.display = "none";
-}
-
-function toggleMenu() {
-  document.getElementById("navMenu").classList.toggle("active");
 }
 
 renderTop4();

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+  <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -18,6 +18,73 @@ body {
   color: white;
 }
 
+/* ================= NAVBAR ================= */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 26px;
+  position: sticky;
+  top: 0;
+  background: rgba(10,10,10,0.92);
+  backdrop-filter: blur(18px);
+  border-bottom: 1px solid rgba(255,215,0,0.22);
+  z-index: 9999;
+}
+
+/* OLYMPUS GOLD TEXT */
+.navbar h2 {
+  font-size: 22px;
+  letter-spacing: 5px;
+  font-weight: 900;
+  text-transform: uppercase;
+
+  background: linear-gradient(90deg,#b8860b,#ffd700,#fff2a6,#ffd700,#b8860b);
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  animation: goldShine 4s linear infinite;
+}
+
+@keyframes goldShine {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 300% 50%; }
+}
+
+/* MENU */
+.menu-toggle {
+  font-size: 26px;
+  cursor: pointer;
+  color: #ffd700;
+}
+
+.nav-links {
+  position: absolute;
+  top: 70px;
+  right: 20px;
+  width: 210px;
+  background: rgba(15,15,15,0.95);
+  border-radius: 14px;
+  display: none;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.nav-links.active {
+  display: flex;
+}
+
+.nav-links a {
+  padding: 12px;
+  color: #ffd700;
+  text-decoration: none;
+}
+
+.nav-links a:hover {
+  background: rgba(255,215,0,0.08);
+}
+
 /* HEADER */
 header {
   text-align: center;
@@ -34,11 +101,6 @@ header h1 {
   -webkit-text-fill-color: transparent;
 
   animation: goldShine 4s linear infinite;
-}
-
-@keyframes goldShine {
-  0% { background-position: 0% 50%; }
-  100% { background-position: 300% 50%; }
 }
 
 header p {
@@ -89,6 +151,19 @@ header p {
 
 <body>
 
+<!-- NAVBAR -->
+<div class="navbar">
+  <h2>OLYMPUS</h2>
+  <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+  <div class="nav-links" id="navMenu">
+    <a href="index.html">Home</a>
+    <a href="schedule.html">Schedule</a>
+    <a href="teams.html">Teams</a>
+    <a href="fame.html">Hall of Fame</a>
+  </div>
+</div>
+
 <header>
   <h1>TEAMS</h1>
   <p>Olympus League Rosters</p>
@@ -97,26 +172,32 @@ header p {
 <div class="container">
 
   <div class="team-card">
-    <img src="logo.png" alt="Team Logo">
+    <img src="logo.png">
     <h2>PHANTOM</h2>
   </div>
 
   <div class="team-card">
-    <img src="logo.png" alt="Team Logo">
+    <img src="logo.png">
     <h2>ECLIPSE</h2>
   </div>
 
   <div class="team-card">
-    <img src="logo.png" alt="Team Logo">
+    <img src="logo.png">
     <h2>NOVA</h2>
   </div>
 
   <div class="team-card">
-    <img src="logo.png" alt="Team Logo">
+    <img src="logo.png">
     <h2>TITAN</h2>
   </div>
 
 </div>
+
+<script>
+function toggleMenu() {
+  document.getElementById("navMenu").classList.toggle("active");
+}
+</script>
 
 </body>
 </html>

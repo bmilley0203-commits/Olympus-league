@@ -17,18 +17,24 @@ body {
   background: radial-gradient(circle at top, #0d0d0d, #050505);
   color: white;
   overflow-x: hidden;
+  opacity: 0;
+  animation: pageIn 1.2s ease forwards;
 }
 
-/* GOLD BACKGROUND GLOW */
+@keyframes pageIn {
+  to { opacity: 1; }
+}
+
+/* BACKGROUND */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
   background:
-    radial-gradient(circle at 15% 20%, rgba(255,215,0,0.12), transparent 35%),
-    radial-gradient(circle at 85% 30%, rgba(255,180,0,0.10), transparent 40%),
-    radial-gradient(circle at 50% 85%, rgba(255,215,0,0.08), transparent 45%);
-  filter: blur(20px);
+    radial-gradient(circle at 20% 20%, rgba(255,215,0,0.12), transparent 40%),
+    radial-gradient(circle at 80% 30%, rgba(255,170,0,0.10), transparent 45%),
+    radial-gradient(circle at 50% 80%, rgba(255,215,0,0.08), transparent 50%);
+  filter: blur(22px);
   animation: floatBg 12s ease-in-out infinite;
   z-index: -1;
 }
@@ -38,7 +44,7 @@ body::before {
   50% { transform: translate(2%, -2%); }
 }
 
-/* NAVBAR */
+/* NAV */
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -46,28 +52,17 @@ body::before {
   padding: 18px 26px;
   position: sticky;
   top: 0;
-  background: rgba(10,10,10,0.7);
+  background: rgba(10,10,10,0.75);
   backdrop-filter: blur(14px);
   border-bottom: 1px solid rgba(255,215,0,0.15);
-  z-index: 1000;
 }
 
-.navbar h2 {
-  color: #ffd700;
-  letter-spacing: 2px;
-  font-size: 20px;
-}
+.navbar h2 { color: #ffd700; }
 
-/* MENU */
 .menu-toggle {
   font-size: 26px;
   cursor: pointer;
   color: #ffd700;
-  transition: 0.2s;
-}
-
-.menu-toggle:hover {
-  transform: scale(1.1);
 }
 
 .nav-links {
@@ -76,87 +71,65 @@ body::before {
   right: 20px;
   width: 210px;
   background: rgba(15,15,15,0.95);
-  border: 1px solid rgba(255,215,0,0.2);
   border-radius: 14px;
   display: none;
   flex-direction: column;
-  overflow: hidden;
-  transform: translateY(-10px);
-  opacity: 0;
-  transition: 0.25s ease;
 }
 
-.nav-links.active {
-  display: flex;
-  transform: translateY(0);
-  opacity: 1;
-}
+.nav-links.active { display: flex; }
 
 .nav-links a {
-  padding: 12px 14px;
-  text-decoration: none;
+  padding: 12px;
   color: #ffd700;
-  transition: 0.2s;
+  text-decoration: none;
 }
 
-.nav-links a:hover {
-  background: rgba(255,215,0,0.1);
-  padding-left: 18px;
+/* FADE SYSTEM */
+.fade {
+  opacity: 0;
+  transform: translateY(25px);
+  animation: fadeUp 1.2s ease forwards;
 }
+
+@keyframes fadeUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.delay-1 { animation-delay: 0.2s; }
+.delay-2 { animation-delay: 0.5s; }
+.delay-3 { animation-delay: 0.8s; }
+.delay-4 { animation-delay: 1.1s; }
 
 /* HERO */
 .hero {
   text-align: center;
-  padding: 100px 20px 70px;
-}
-
-.logo-wrapper {
-  position: relative;
-  display: inline-block;
-}
-
-.logo-wrapper::before {
-  content: "";
-  position: absolute;
-  inset: -30px;
-  border-radius: 50%;
-  border: 2px solid rgba(255,215,0,0.25);
-  animation: spin 8s linear infinite;
-}
-
-@keyframes spin {
-  to { transform: rotate(360deg); }
+  padding: 90px 20px;
 }
 
 .hero img {
   width: 280px;
   filter: drop-shadow(0 0 30px gold);
-  animation: float 3s ease-in-out infinite, glow 2.5s ease-in-out infinite;
+  animation: float 3s ease-in-out infinite, glow 2.5s infinite;
 }
 
 @keyframes float {
-  0%,100% { transform: translateY(0); }
-  50% { transform: translateY(-12px); }
+  50% { transform: translateY(-10px); }
 }
 
 @keyframes glow {
-  0%,100% { filter: drop-shadow(0 0 15px gold); }
-  50% { filter: drop-shadow(0 0 45px gold); }
+  50% { filter: drop-shadow(0 0 50px gold); }
 }
 
 .hero h2 {
-  margin-top: 22px;
   font-size: 44px;
   color: #ffd700;
-  letter-spacing: 1px;
 }
 
 .hero p {
   color: #bbb;
-  margin-top: 10px;
 }
 
-/* SECTIONS */
+/* SECTION */
 .section {
   padding: 60px 20px;
   max-width: 1100px;
@@ -167,58 +140,73 @@ body::before {
   text-align: center;
   color: #ffd700;
   margin-bottom: 25px;
-  font-size: 28px;
 }
 
-/* CARDS */
-.cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 20px;
-}
-
-.card {
-  background: rgba(20,20,20,0.7);
-  border: 1px solid rgba(255,215,0,0.15);
-  padding: 20px;
-  border-radius: 16px;
-  cursor: pointer;
-  transition: 0.3s;
+/* FEATURE BOXES (MATCH + PLAYER) */
+.featured-box {
+  background: linear-gradient(135deg, rgba(255,215,0,0.12), rgba(0,0,0,0.7));
+  border: 1px solid rgba(255,215,0,0.25);
+  padding: 24px;
+  border-radius: 18px;
+  text-align: center;
   position: relative;
   overflow: hidden;
-}
-
-.card::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at top left, rgba(255,215,0,0.15), transparent 60%);
+  animation: popIn 1s ease forwards, pulseGlow 3s infinite;
   opacity: 0;
-  transition: 0.3s;
+  transform: translateY(20px);
 }
 
-.card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 0 30px rgba(255,215,0,0.25);
+@keyframes popIn {
+  to { opacity: 1; transform: translateY(0); }
 }
 
-.card:hover::before {
-  opacity: 1;
+@keyframes pulseGlow {
+  50% { box-shadow: 0 0 35px rgba(255,215,0,0.25); }
 }
 
-/* BUTTON */
-.join-btn {
+/* LEADERBOARD */
+.leaderboard {
+  background: rgba(20,20,20,0.6);
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(255,215,0,0.2);
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  padding: 14px 18px;
+  border-bottom: 1px solid rgba(255,215,0,0.08);
+}
+
+.row:hover {
+  background: rgba(255,215,0,0.06);
+}
+
+.rank { color: #ffd700; width: 30px; }
+.team { flex: 1; }
+.points { color: #ccc; }
+
+/* BUTTON FIX */
+.join-btn, .show-btn {
   display: inline-block;
   padding: 14px 30px;
   border: 2px solid #ffd700;
   color: #ffd700;
   border-radius: 12px;
-  text-decoration: none;
-  transition: 0.3s;
+  cursor: pointer;
+  margin-top: 10px;
+  background: transparent;
+
+  appearance: none;
+  -webkit-appearance: none;
+  outline: none;
+
   font-weight: bold;
+  transition: 0.25s;
 }
 
-.join-btn:hover {
+.join-btn:hover, .show-btn:hover {
   background: #ffd700;
   color: black;
   transform: scale(1.05);
@@ -231,37 +219,30 @@ body::before {
   display: none;
   align-items: center;
   justify-content: center;
-  background: rgba(0,0,0,0.7);
+  background: rgba(0,0,0,0.75);
   backdrop-filter: blur(12px);
 }
 
 .overlay-content {
   background: rgba(20,20,20,0.95);
-  padding: 28px;
-  border-radius: 18px;
+  padding: 25px;
+  border-radius: 16px;
   border: 1px solid rgba(255,215,0,0.25);
   width: 90%;
-  max-width: 380px;
-  text-align: center;
-  animation: pop 0.25s ease;
+  max-width: 450px;
+  max-height: 70vh;
+  overflow-y: auto;
 }
 
-@keyframes pop {
-  from { transform: scale(0.9); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
-}
-
-.overlay-content h2 {
-  color: #ffd700;
-}
-
-.overlay-content p {
-  color: #ccc;
-  margin-top: 12px;
+.overlay-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: 1px solid rgba(255,215,0,0.1);
 }
 
 .close-btn {
-  margin-top: 18px;
+  margin-top: 15px;
   padding: 10px 18px;
   border: none;
   border-radius: 10px;
@@ -274,74 +255,126 @@ body::before {
 
 <body>
 
-<div class="navbar">
+<!-- NAV -->
+<div class="navbar fade delay-1">
   <h2>OLYMPUS</h2>
   <div class="menu-toggle" onclick="toggleMenu()">☰</div>
   <div class="nav-links" id="navMenu">
     <a href="#">Home</a>
-    <a href="#">Hall of Fame</a>
     <a href="#">Schedule</a>
     <a href="#">Teams</a>
   </div>
 </div>
 
-<div class="hero">
-  <div class="logo-wrapper">
-    <img src="logo.png">
-  </div>
+<!-- HERO -->
+<div class="hero fade delay-1">
+  <img src="logo.png">
   <h2>Olympus R6 League</h2>
   <p>Where Tier 3 talent rises to the top.</p>
 </div>
 
-<div class="section">
-  <h2>About Olympus</h2>
-  <div class="cards">
-    <div class="card" onclick="openOverlay('Competitive Integrity','Structured Tier 3 Rainbow Six Siege competition built for rising talent.')">
-      Competitive Play
-    </div>
-    <div class="card" onclick="openOverlay('Exposure System','Players gain recognition through stats, highlights, and scouting.')">
-      Player Exposure
-    </div>
+<!-- MATCH OF THE WEEK -->
+<div class="section fade delay-2">
+  <h2>Match of the Week</h2>
+  <div class="featured-box">
+    Phantom vs Eclipse — Sunday 8PM EST
   </div>
 </div>
 
-<div class="section" style="text-align:center;">
-  <h2>Join Olympus</h2>
-  <a class="join-btn" href="https://discord.gg/Butq7VhNx" target="_blank">Join Discord</a>
+<!-- PLAYER OF THE WEEK -->
+<div class="section fade delay-2">
+  <h2>Player of the Week</h2>
+  <div class="featured-box">
+    AceStorm — 38 Kills MVP Performance
+  </div>
 </div>
 
+<!-- LEADERBOARD -->
+<div class="section fade delay-3">
+  <h2>Standings</h2>
+  <div class="leaderboard" id="leaderboard"></div>
+  <div style="text-align:center;">
+    <button class="show-btn" onclick="openBoard()">Show Full Standings</button>
+  </div>
+</div>
+
+<!-- JOIN -->
+<div class="section fade delay-4" style="text-align:center;">
+  <h2>Join Olympus</h2>
+  <a class="join-btn" href="https://discord.gg/Butq7VhNx">Join Discord</a>
+</div>
+
+<!-- OVERLAY -->
 <div class="overlay" id="overlay">
   <div class="overlay-content">
-    <h2 id="overlayTitle"></h2>
-    <p id="overlayText"></p>
-    <button class="close-btn" onclick="closeOverlay()">Close</button>
+    <h2 style="color:#ffd700;">Full Standings</h2>
+    <div id="fullBoard"></div>
+    <button class="close-btn" onclick="closeBoard()">Close</button>
   </div>
 </div>
 
 <script>
+const teams = {
+  Phantom: 12,
+  Eclipse: 10,
+  Nova: 9,
+  Titan: 8,
+  Orion: 7,
+  Vortex: 6,
+  Apex: 5,
+  Zenith: 4,
+  Hydra: 3,
+  Ghost: 2,
+  Ember: 1,
+  Surge: 0
+};
+
+function renderTop4() {
+  const board = document.getElementById("leaderboard");
+  board.innerHTML = "";
+
+  Object.entries(teams)
+    .sort((a,b)=>b[1]-a[1])
+    .slice(0,4)
+    .forEach((t,i)=>{
+      board.innerHTML += `
+        <div class="row">
+          <div class="rank">${i+1}</div>
+          <div class="team">${t[0]}</div>
+          <div class="points">${t[1]} pts</div>
+        </div>
+      `;
+    });
+}
+
+function openBoard() {
+  const full = document.getElementById("fullBoard");
+  full.innerHTML = "";
+
+  Object.entries(teams)
+    .sort((a,b)=>b[1]-a[1])
+    .forEach((t,i)=>{
+      full.innerHTML += `
+        <div class="overlay-row">
+          <div>${i+1}</div>
+          <div>${t[0]}</div>
+          <div>${t[1]} pts</div>
+        </div>
+      `;
+    });
+
+  document.getElementById("overlay").style.display = "flex";
+}
+
+function closeBoard() {
+  document.getElementById("overlay").style.display = "none";
+}
+
 function toggleMenu() {
   document.getElementById("navMenu").classList.toggle("active");
 }
 
-function openOverlay(title, text) {
-  document.getElementById("overlayTitle").innerText = title;
-  document.getElementById("overlayText").innerText = text;
-  document.getElementById("overlay").style.display = "flex";
-}
-
-function closeOverlay() {
-  document.getElementById("overlay").style.display = "none";
-}
-
-// close menu when clicking outside
-document.addEventListener("click", function(e) {
-  const menu = document.getElementById("navMenu");
-  const toggle = document.querySelector(".menu-toggle");
-
-  if (!menu.contains(e.target) && !toggle.contains(e.target)) {
-    menu.classList.remove("active");
-  }
-});
+renderTop4();
 </script>
 
 </body>

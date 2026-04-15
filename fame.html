@@ -19,7 +19,7 @@ body {
   overflow-x: hidden;
 }
 
-/* NAV (same style as main site) */
+/* NAV */
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -44,6 +44,34 @@ body {
   animation: goldShine 4s linear infinite;
 }
 
+/* MENU */
+.menu-toggle {
+  font-size: 26px;
+  cursor: pointer;
+  color: #ffd700;
+}
+
+.nav-links {
+  position: absolute;
+  top: 70px;
+  right: 20px;
+  width: 210px;
+  background: rgba(15,15,15,0.95);
+  border-radius: 14px;
+  display: none;
+  flex-direction: column;
+}
+
+.nav-links.active {
+  display: flex;
+}
+
+.nav-links a {
+  padding: 12px;
+  color: #ffd700;
+  text-decoration: none;
+}
+
 @keyframes goldShine {
   0% { background-position: 0% 50%; }
   100% { background-position: 300% 50%; }
@@ -60,6 +88,8 @@ body {
   letter-spacing: 4px;
 
   background: linear-gradient(90deg,#b8860b,#ffd700,#fff2a6,#ffd700,#b8860b);
+  background-size: 300% 100%;
+
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 
@@ -84,7 +114,7 @@ body {
   color: #ffd700;
 }
 
-/* HALL OF FAME CARDS */
+/* CARDS */
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -112,7 +142,7 @@ body {
   height: 100%;
   background: linear-gradient(120deg, transparent, rgba(255,215,0,0.4), transparent);
   transform: skewX(-20deg);
-  animation: shimmer l.8s linear infinite;
+  animation: shimmer 1.8s linear infinite;
 }
 
 @keyframes shimmer {
@@ -171,7 +201,6 @@ body {
 .record-row span:last-child {
   color: #ccc;
 }
-
 </style>
 </head>
 
@@ -180,6 +209,12 @@ body {
 <!-- NAV -->
 <div class="navbar">
   <h2>OLYMPUS</h2>
+  <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+  <div class="nav-links" id="navMenu">
+    <a href="#">Home</a>
+    <a href="#">Schedule</a>
+    <a href="#">Teams</a>
+  </div>
 </div>
 
 <!-- HERO -->
@@ -253,6 +288,12 @@ body {
 
   </div>
 </div>
+
+<script>
+function toggleMenu() {
+  document.getElementById("navMenu").classList.toggle("active");
+}
+</script>
 
 </body>
 </html>

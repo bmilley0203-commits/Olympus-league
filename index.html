@@ -87,17 +87,12 @@ body::before {
   color: #ffd700;
 }
 
-/* HERO */
-.hero {
-  text-align: center;
-  padding: 100px 20px 70px;
-}
+/* ================= INTRO SYSTEM ================= */
 
-/* 🔥 FADE-IN WRAPPER (THIS IS THE FIX) */
 .fade-in {
   opacity: 0;
-  transform: translateY(20px);
-  animation: fadeIn 1s ease forwards;
+  transform: translateY(25px);
+  animation: fadeIn 2.2s ease forwards;
 }
 
 @keyframes fadeIn {
@@ -107,7 +102,16 @@ body::before {
   }
 }
 
-/* LOGO WRAPPER */
+.delay-1 { animation-delay: 0.4s; }
+.delay-2 { animation-delay: 0.8s; }
+.delay-3 { animation-delay: 1.2s; }
+
+/* HERO */
+.hero {
+  text-align: center;
+  padding: 100px 20px 70px;
+}
+
 .logo-wrapper {
   position: relative;
   display: inline-block;
@@ -127,7 +131,7 @@ body::before {
   to { transform: rotate(360deg); }
 }
 
-/* LOGO ONLY ANIMATION (NO FADE HERE) */
+/* logo animation */
 .hero img {
   width: 280px;
   filter: drop-shadow(0 0 30px gold);
@@ -189,6 +193,32 @@ body::before {
   box-shadow: 0 0 30px rgba(255,215,0,0.25);
 }
 
+/* MATCH OF THE WEEK */
+.featured {
+  background: linear-gradient(135deg, rgba(255,215,0,0.08), rgba(0,0,0,0.6));
+  border: 1px solid rgba(255,215,0,0.25);
+  padding: 25px;
+  border-radius: 18px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  animation: pulseGlow 3s infinite;
+}
+
+@keyframes pulseGlow {
+  0%,100% { box-shadow: 0 0 0 rgba(255,215,0,0.0); }
+  50% { box-shadow: 0 0 35px rgba(255,215,0,0.25); }
+}
+
+.featured h3 {
+  color: #ffd700;
+  margin-bottom: 10px;
+}
+
+.featured p {
+  color: #ccc;
+}
+
 /* BUTTON */
 .join-btn {
   display: inline-block;
@@ -197,11 +227,14 @@ body::before {
   color: #ffd700;
   border-radius: 12px;
   text-decoration: none;
+  transition: 0.3s;
+  font-weight: bold;
 }
 
 .join-btn:hover {
   background: #ffd700;
   color: black;
+  transform: scale(1.05);
 }
 
 /* OVERLAY */
@@ -259,33 +292,49 @@ body::before {
   </div>
 </div>
 
+<!-- HERO -->
 <div class="hero">
-  <!-- IMPORTANT: fade-in is here -->
   <div class="logo-wrapper fade-in">
     <img src="logo.png">
   </div>
 
-  <h2 class="fade-in">Olympus R6 League</h2>
-  <p class="fade-in">Where Tier 3 talent rises to the top.</p>
+  <h2 class="fade-in delay-1">Olympus R6 League</h2>
+  <p class="fade-in delay-2">Where Tier 3 talent rises to the top.</p>
 </div>
 
-<div class="section">
+<!-- MATCH OF THE WEEK -->
+<div class="section fade-in delay-3">
+  <h2>Match of the Week</h2>
+
+  <div class="featured">
+    <h3>Phantom vs Eclipse</h3>
+    <p>Sunday 8PM EST — Streamed Live</p>
+    <p>High-stakes matchup for playoff positioning</p>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<div class="section fade-in delay-3">
   <h2>About Olympus</h2>
+
   <div class="cards">
     <div class="card" onclick="openOverlay('Competitive Integrity','Structured Tier 3 Rainbow Six Siege competition built for rising talent.')">
       Competitive Play
     </div>
+
     <div class="card" onclick="openOverlay('Exposure System','Players gain recognition through stats, highlights, and scouting.')">
       Player Exposure
     </div>
   </div>
 </div>
 
-<div class="section" style="text-align:center;">
+<!-- JOIN -->
+<div class="section fade-in delay-3" style="text-align:center;">
   <h2>Join Olympus</h2>
   <a class="join-btn" href="https://discord.gg/Butq7VhNx" target="_blank">Join Discord</a>
 </div>
 
+<!-- OVERLAY -->
 <div class="overlay" id="overlay">
   <div class="overlay-content">
     <h2 id="overlayTitle"></h2>

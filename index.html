@@ -19,7 +19,7 @@ body {
   overflow-x: hidden;
 }
 
-/* GOLD BACKGROUND GLOW */
+/* BACKGROUND */
 body::before {
   content: "";
   position: fixed;
@@ -63,11 +63,6 @@ body::before {
   font-size: 26px;
   cursor: pointer;
   color: #ffd700;
-  transition: 0.2s;
-}
-
-.menu-toggle:hover {
-  transform: scale(1.1);
 }
 
 .nav-links {
@@ -80,7 +75,6 @@ body::before {
   border-radius: 14px;
   display: none;
   flex-direction: column;
-  overflow: hidden;
 }
 
 .nav-links.active {
@@ -93,16 +87,27 @@ body::before {
   color: #ffd700;
 }
 
-.nav-links a:hover {
-  background: rgba(255,215,0,0.1);
-}
-
 /* HERO */
 .hero {
   text-align: center;
   padding: 100px 20px 70px;
 }
 
+/* 🔥 FADE-IN WRAPPER (THIS IS THE FIX) */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeIn 1s ease forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* LOGO WRAPPER */
 .logo-wrapper {
   position: relative;
   display: inline-block;
@@ -122,35 +127,18 @@ body::before {
   to { transform: rotate(360deg); }
 }
 
-/* 🔥 LOGO FADE-IN + ANIMATION PATCH */
+/* LOGO ONLY ANIMATION (NO FADE HERE) */
 .hero img {
   width: 280px;
   filter: drop-shadow(0 0 30px gold);
-
-  /* intro state */
-  opacity: 0;
-  transform: translateY(20px) scale(0.95);
-
-  animation:
-    logoIntro 1s ease forwards,
-    float 3s ease-in-out 1s infinite,
-    glow 2.5s ease-in-out 1s infinite;
+  animation: float 3s ease-in-out infinite, glow 2.5s ease-in-out infinite;
 }
 
-@keyframes logoIntro {
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-/* floating */
 @keyframes float {
   0%,100% { transform: translateY(0); }
   50% { transform: translateY(-12px); }
 }
 
-/* glow */
 @keyframes glow {
   0%,100% { filter: drop-shadow(0 0 15px gold); }
   50% { filter: drop-shadow(0 0 45px gold); }
@@ -178,7 +166,6 @@ body::before {
   text-align: center;
   color: #ffd700;
   margin-bottom: 25px;
-  font-size: 28px;
 }
 
 /* CARDS */
@@ -195,8 +182,6 @@ body::before {
   border-radius: 16px;
   cursor: pointer;
   transition: 0.3s;
-  position: relative;
-  overflow: hidden;
 }
 
 .card:hover {
@@ -212,14 +197,11 @@ body::before {
   color: #ffd700;
   border-radius: 12px;
   text-decoration: none;
-  transition: 0.3s;
-  font-weight: bold;
 }
 
 .join-btn:hover {
   background: #ffd700;
   color: black;
-  transform: scale(1.05);
 }
 
 /* OVERLAY */
@@ -278,11 +260,13 @@ body::before {
 </div>
 
 <div class="hero">
-  <div class="logo-wrapper">
+  <!-- IMPORTANT: fade-in is here -->
+  <div class="logo-wrapper fade-in">
     <img src="logo.png">
   </div>
-  <h2>Olympus R6 League</h2>
-  <p>Where Tier 3 talent rises to the top.</p>
+
+  <h2 class="fade-in">Olympus R6 League</h2>
+  <p class="fade-in">Where Tier 3 talent rises to the top.</p>
 </div>
 
 <div class="section">

@@ -53,52 +53,45 @@ body::before {
   border-bottom: 1px solid rgba(255,215,0,0.2);
 }
 
+/* 🔥 ALWAYS DROPDOWN (PC + MOBILE) */
 .menu-toggle {
-  display: none;
+  display: block;
   font-size: 24px;
   cursor: pointer;
 }
 
-/* NAV LINKS */
 .nav-links {
-  display: flex;
-  gap: 20px;
+  position: absolute;
+  top: 70px;
+  right: 10px;
+
+  background: rgba(30, 20, 0, 0.95);
+  backdrop-filter: blur(12px);
+
+  flex-direction: column;
+  width: 220px;
+  display: none;
+  padding: 10px;
+
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(255,215,0,0.3);
 }
 
 .nav-links a {
   color: #ffd700;
   text-decoration: none;
+  padding: 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
   transition: 0.3s;
 }
 
 .nav-links a:hover {
   color: white;
+  background: rgba(255,215,0,0.1);
 }
 
-/* MOBILE MENU */
-@media(max-width: 768px) {
-  .menu-toggle { display: block; }
-
-  .nav-links {
-    position: absolute;
-    top: 70px;
-    right: 10px;
-
-    background: rgba(30, 20, 0, 0.9);
-    backdrop-filter: blur(12px);
-
-    flex-direction: column;
-    width: 200px;
-    display: none;
-    padding: 10px;
-
-    border-radius: 12px;
-    box-shadow: 0 0 20px rgba(255,215,0,0.3);
-  }
-
-  .nav-links.active {
-    display: flex;
-  }
+.nav-links.active {
+  display: flex;
 }
 
 /* HERO */

@@ -38,7 +38,7 @@ body::before {
   50% { transform: translate(2%, -2%); }
 }
 
-/* NAVBAR */
+/* NAV */
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -49,16 +49,10 @@ body::before {
   background: rgba(10,10,10,0.7);
   backdrop-filter: blur(14px);
   border-bottom: 1px solid rgba(255,215,0,0.15);
-  z-index: 1000;
 }
 
-.navbar h2 {
-  color: #ffd700;
-  letter-spacing: 2px;
-  font-size: 20px;
-}
+.navbar h2 { color: #ffd700; }
 
-/* MENU */
 .menu-toggle {
   font-size: 26px;
   cursor: pointer;
@@ -71,92 +65,46 @@ body::before {
   right: 20px;
   width: 210px;
   background: rgba(15,15,15,0.95);
-  border: 1px solid rgba(255,215,0,0.2);
   border-radius: 14px;
   display: none;
   flex-direction: column;
 }
 
-.nav-links.active {
-  display: flex;
-}
+.nav-links.active { display: flex; }
 
 .nav-links a {
-  padding: 12px 14px;
-  text-decoration: none;
+  padding: 12px;
   color: #ffd700;
+  text-decoration: none;
 }
-
-/* ================= INTRO SYSTEM ================= */
-
-.fade-in {
-  opacity: 0;
-  transform: translateY(25px);
-  animation: fadeIn 2.2s ease forwards;
-}
-
-@keyframes fadeIn {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.delay-1 { animation-delay: 0.4s; }
-.delay-2 { animation-delay: 0.8s; }
-.delay-3 { animation-delay: 1.2s; }
 
 /* HERO */
 .hero {
   text-align: center;
-  padding: 100px 20px 70px;
+  padding: 90px 20px;
 }
 
-.logo-wrapper {
-  position: relative;
-  display: inline-block;
-}
-
-/* spinning ring */
-.logo-wrapper::before {
-  content: "";
-  position: absolute;
-  inset: -30px;
-  border-radius: 50%;
-  border: 2px solid rgba(255,215,0,0.25);
-  animation: spin 8s linear infinite;
-}
-
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
-
-/* logo animation */
 .hero img {
   width: 280px;
   filter: drop-shadow(0 0 30px gold);
-  animation: float 3s ease-in-out infinite, glow 2.5s ease-in-out infinite;
+  animation: float 3s ease-in-out infinite, glow 2.5s infinite;
 }
 
 @keyframes float {
-  0%,100% { transform: translateY(0); }
-  50% { transform: translateY(-12px); }
+  50% { transform: translateY(-10px); }
 }
 
 @keyframes glow {
-  0%,100% { filter: drop-shadow(0 0 15px gold); }
   50% { filter: drop-shadow(0 0 45px gold); }
 }
 
 .hero h2 {
-  margin-top: 22px;
   font-size: 44px;
   color: #ffd700;
 }
 
 .hero p {
   color: #bbb;
-  margin-top: 10px;
 }
 
 /* SECTIONS */
@@ -185,39 +133,39 @@ body::before {
   padding: 20px;
   border-radius: 16px;
   cursor: pointer;
-  transition: 0.3s;
 }
 
-.card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 0 30px rgba(255,215,0,0.25);
-}
-
-/* MATCH OF THE WEEK */
+/* MATCH */
 .featured {
-  background: linear-gradient(135deg, rgba(255,215,0,0.08), rgba(0,0,0,0.6));
+  background: rgba(255,215,0,0.06);
   border: 1px solid rgba(255,215,0,0.25);
-  padding: 25px;
-  border-radius: 18px;
+  padding: 20px;
+  border-radius: 16px;
   text-align: center;
-  position: relative;
+}
+
+/* LEADERBOARD */
+.leaderboard {
+  background: rgba(20,20,20,0.6);
+  border-radius: 16px;
   overflow: hidden;
-  animation: pulseGlow 3s infinite;
+  border: 1px solid rgba(255,215,0,0.2);
 }
 
-@keyframes pulseGlow {
-  0%,100% { box-shadow: 0 0 0 rgba(255,215,0,0.0); }
-  50% { box-shadow: 0 0 35px rgba(255,215,0,0.25); }
+.row {
+  display: flex;
+  justify-content: space-between;
+  padding: 14px 18px;
+  border-bottom: 1px solid rgba(255,215,0,0.08);
 }
 
-.featured h3 {
-  color: #ffd700;
-  margin-bottom: 10px;
+.row:hover {
+  background: rgba(255,215,0,0.05);
 }
 
-.featured p {
-  color: #ccc;
-}
+.rank { color: #ffd700; width: 30px; }
+.team { flex: 1; }
+.points { color: #ccc; }
 
 /* BUTTON */
 .join-btn {
@@ -227,14 +175,11 @@ body::before {
   color: #ffd700;
   border-radius: 12px;
   text-decoration: none;
-  transition: 0.3s;
-  font-weight: bold;
 }
 
 .join-btn:hover {
   background: #ffd700;
   color: black;
-  transform: scale(1.05);
 }
 
 /* OVERLAY */
@@ -245,36 +190,15 @@ body::before {
   align-items: center;
   justify-content: center;
   background: rgba(0,0,0,0.7);
-  backdrop-filter: blur(12px);
 }
 
 .overlay-content {
   background: rgba(20,20,20,0.95);
-  padding: 28px;
-  border-radius: 18px;
+  padding: 25px;
+  border-radius: 16px;
   border: 1px solid rgba(255,215,0,0.25);
   width: 90%;
   max-width: 380px;
-  text-align: center;
-}
-
-.overlay-content h2 {
-  color: #ffd700;
-}
-
-.overlay-content p {
-  color: #ccc;
-  margin-top: 12px;
-}
-
-.close-btn {
-  margin-top: 18px;
-  padding: 10px 18px;
-  border: none;
-  border-radius: 10px;
-  background: #ffd700;
-  font-weight: bold;
-  cursor: pointer;
 }
 </style>
 </head>
@@ -283,80 +207,88 @@ body::before {
 
 <div class="navbar">
   <h2>OLYMPUS</h2>
-  <div class="menu-toggle" onclick="toggleMenu()">☰</div>
-  <div class="nav-links" id="navMenu">
-    <a href="#">Home</a>
-    <a href="#">Hall of Fame</a>
-    <a href="#">Schedule</a>
-    <a href="#">Teams</a>
-  </div>
 </div>
 
-<!-- HERO -->
 <div class="hero">
-  <div class="logo-wrapper fade-in">
-    <img src="logo.png">
-  </div>
-
-  <h2 class="fade-in delay-1">Olympus R6 League</h2>
-  <p class="fade-in delay-2">Where Tier 3 talent rises to the top.</p>
+  <img src="logo.png">
+  <h2>Olympus R6 League</h2>
+  <p>Where Tier 3 talent rises to the top.</p>
 </div>
 
-<!-- MATCH OF THE WEEK -->
-<div class="section fade-in delay-3">
+<!-- MATCH OF WEEK -->
+<div class="section">
   <h2>Match of the Week</h2>
-
   <div class="featured">
-    <h3>Phantom vs Eclipse</h3>
-    <p>Sunday 8PM EST — Streamed Live</p>
-    <p>High-stakes matchup for playoff positioning</p>
+    Phantom vs Eclipse — Sunday 8PM EST
   </div>
 </div>
 
-<!-- ABOUT -->
-<div class="section fade-in delay-3">
-  <h2>About Olympus</h2>
-
-  <div class="cards">
-    <div class="card" onclick="openOverlay('Competitive play','Structured Tier 3 Rainbow Six Siege competition built around disciplined gameplay, fair rules, and high-level team coordination. Every match is designed to push teams toward real competitive growth.')">
-      Competitive Play
-    </div>
-
-    <div class="card" onclick="openOverlay('Exposure','Every team has a platform to prove themselves. Through streamed matches, recorded stats, and featured highlights, Olympus puts organizations in the spotlight and helps rising teams build recognition across the competitive Rainbow Six Siege scene')">
-      Player Exposure
-    </div>
-  </div>
+<!-- LEADERBOARD -->
+<div class="section">
+  <h2>Standings</h2>
+  <div class="leaderboard" id="leaderboard"></div>
 </div>
 
-<!-- JOIN -->
-<div class="section fade-in delay-3" style="text-align:center;">
-  <h2>Join Olympus</h2>
-  <a class="join-btn" href="https://discord.gg/Butq7VhNx" target="_blank">Join Discord</a>
-</div>
-
-<!-- OVERLAY -->
-<div class="overlay" id="overlay">
-  <div class="overlay-content">
-    <h2 id="overlayTitle"></h2>
-    <p id="overlayText"></p>
-    <button class="close-btn" onclick="closeOverlay()">Close</button>
-  </div>
-</div>
-
+<!-- SCRIPTS -->
 <script>
-function toggleMenu() {
-  document.getElementById("navMenu").classList.toggle("active");
+/* =======================
+   TEAMS (AUTO STANDINGS)
+======================= */
+const teams = {
+  "Phantom": 0,
+  "Eclipse": 0,
+  "Nova": 0,
+  "Titan": 0
+};
+
+/* =======================
+   MATCHES (EDIT THIS)
+======================= */
+const matches = [
+  { teamA: "Phantom", teamB: "Eclipse", winner: "Phantom", status: "played" },
+  { teamA: "Nova", teamB: "Titan", winner: "Nova", status: "played" },
+  { teamA: "Phantom", teamB: "Nova", winner: "Nova", status: "played" },
+];
+
+/* =======================
+   CALCULATE STANDINGS
+======================= */
+function calculateStandings() {
+
+  // reset
+  for (let t in teams) teams[t] = 0;
+
+  matches.forEach(m => {
+    if (m.status === "played") {
+      teams[m.winner] += 3; // win = 3 points
+    }
+  });
+
+  renderLeaderboard();
 }
 
-function openOverlay(title, text) {
-  document.getElementById("overlayTitle").innerText = title;
-  document.getElementById("overlayText").innerText = text;
-  document.getElementById("overlay").style.display = "flex";
+/* =======================
+   RENDER LEADERBOARD
+======================= */
+function renderLeaderboard() {
+  const board = document.getElementById("leaderboard");
+  board.innerHTML = "";
+
+  const sorted = Object.entries(teams)
+    .sort((a,b) => b[1] - a[1]);
+
+  sorted.forEach((t, i) => {
+    board.innerHTML += `
+      <div class="row">
+        <div class="rank">${i+1}</div>
+        <div class="team">${t[0]}</div>
+        <div class="points">${t[1]} pts</div>
+      </div>
+    `;
+  });
 }
 
-function closeOverlay() {
-  document.getElementById("overlay").style.display = "none";
-}
+calculateStandings();
 </script>
 
 </body>

@@ -44,7 +44,7 @@ body::before {
   50% { transform: translate(2%, -2%); }
 }
 
-/* NAV */
+/* NAV - FIXED */
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -52,9 +52,10 @@ body::before {
   padding: 18px 26px;
   position: sticky;
   top: 0;
-  background: rgba(10,10,10,0.75);
-  backdrop-filter: blur(14px);
-  border-bottom: 1px solid rgba(255,215,0,0.15);
+  background: rgba(10,10,10,0.92);
+  backdrop-filter: blur(18px);
+  border-bottom: 1px solid rgba(255,215,0,0.22);
+  z-index: 9999;
 }
 
 .navbar h2 { color: #ffd700; }
@@ -100,10 +101,10 @@ body::before {
 .delay-3 { animation-delay: 0.8s; }
 .delay-4 { animation-delay: 1.1s; }
 
-/* HERO */
+/* HERO - FIXED SPACING */
 .hero {
   text-align: center;
-  padding: 90px 20px;
+  padding: 120px 20px 90px;
 }
 
 .hero img {
@@ -154,12 +155,9 @@ body::before {
   animation: popIn 1s ease forwards, pulseGlow 3s infinite;
   opacity: 0;
   transform: translateY(20px);
-
-  /* 🔥 ADDED UPGRADE EFFECTS */
   transition: 0.4s ease;
 }
 
-/* 🔥 SHIMMER EFFECT */
 .featured-box::before {
   content: "";
   position: absolute;
@@ -183,17 +181,14 @@ body::before {
   100% { left: 120%; }
 }
 
-/* ENTRY ANIMATION */
 @keyframes popIn {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* GLOW PULSE */
 @keyframes pulseGlow {
   50% { box-shadow: 0 0 45px rgba(255,215,0,0.30); }
 }
 
-/* 🔥 HOVER LIFT (NEW) */
 .featured-box:hover {
   transform: translateY(-8px) scale(1.02);
   box-shadow: 0 0 60px rgba(255,215,0,0.35);
@@ -222,7 +217,6 @@ body::before {
 .team { flex: 1; }
 .points { color: #ccc; }
 
-/* BUTTON FIX */
 .join-btn, .show-btn {
   display: inline-block;
   padding: 14px 30px;
@@ -232,7 +226,6 @@ body::before {
   cursor: pointer;
   margin-top: 10px;
   background: transparent;
-
   font-weight: bold;
   transition: 0.25s;
 }
@@ -286,7 +279,6 @@ body::before {
 
 <body>
 
-<!-- NAV -->
 <div class="navbar fade delay-1">
   <h2>OLYMPUS</h2>
   <div class="menu-toggle" onclick="toggleMenu()">☰</div>
@@ -297,30 +289,22 @@ body::before {
   </div>
 </div>
 
-<!-- HERO -->
 <div class="hero fade delay-1">
   <img src="logo.png">
   <h2>Olympus R6 League</h2>
   <p>Where Tier 3 talent rises to the top.</p>
 </div>
 
-<!-- MATCH OF THE WEEK -->
 <div class="section fade delay-2">
   <h2>Match of the Week</h2>
-  <div class="featured-box">
-    Phantom vs Eclipse — Sunday 8PM EST
-  </div>
+  <div class="featured-box">Phantom vs Eclipse — Sunday 8PM EST</div>
 </div>
 
-<!-- PLAYER OF THE WEEK -->
 <div class="section fade delay-2">
   <h2>Player of the Week</h2>
-  <div class="featured-box">
-    AceStorm — 38 Kills MVP Performance
-  </div>
+  <div class="featured-box">AceStorm — 38 Kills MVP Performance</div>
 </div>
 
-<!-- LEADERBOARD -->
 <div class="section fade delay-3">
   <h2>Standings</h2>
   <div class="leaderboard" id="leaderboard"></div>
@@ -329,13 +313,11 @@ body::before {
   </div>
 </div>
 
-<!-- JOIN -->
 <div class="section fade delay-4" style="text-align:center;">
   <h2>Join Olympus</h2>
   <a class="join-btn" href="https://discord.gg/2xsKgrESJ">Join Discord</a>
 </div>
 
-<!-- OVERLAY -->
 <div class="overlay" id="overlay">
   <div class="overlay-content">
     <h2 style="color:#ffd700;">Full Standings</h2>
@@ -360,20 +342,14 @@ const teams = {
   Surge: 0
 };
 
-function getSortedTeams() {
-  return Object.entries(teams).sort((a, b) => b[1] - a[1]);
-}
-
 function renderTop4() {
   const board = document.getElementById("leaderboard");
   board.innerHTML = "";
-
-  getSortedTeams()
-    .slice(0, 4)
-    .forEach((t, i) => {
+  Object.entries(teams).sort((a,b)=>b[1]-a[1]).slice(0,4)
+    .forEach((t,i)=>{
       board.innerHTML += `
         <div class="row">
-          <div class="rank">${i + 1}</div>
+          <div class="rank">${i+1}</div>
           <div class="team">${t[0]}</div>
           <div class="points">${t[1]} pts</div>
         </div>
@@ -384,19 +360,18 @@ function renderTop4() {
 function openBoard() {
   const full = document.getElementById("fullBoard");
   full.innerHTML = "";
-
-  getSortedTeams().forEach((t, i) => {
+  Object.entries(teams).sort((a,b)=>b[1]-a[1]).forEach((t,i)=>{
     full.innerHTML += `
       <div class="overlay-row">
-        <div>${i + 1}</div>
+        <div>${i+1}</div>
         <div>${t[0]}</div>
         <div>${t[1]} pts</div>
       </div>
     `;
   });
-
   document.getElementById("overlay").style.display = "flex";
 }
+
 function closeBoard() {
   document.getElementById("overlay").style.display = "none";
 }

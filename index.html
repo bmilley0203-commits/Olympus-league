@@ -145,32 +145,14 @@ body::before {
   box-shadow: 0 0 25px rgba(255,215,0,0.25);
 }
 
-/* ================= WEEK BOX ANIMATION ================= */
-
+/* MATCH / PLAYER BOX */
 .featured-box {
   background: linear-gradient(135deg, rgba(255,215,0,0.12), rgba(0,0,0,0.8));
   border: 1px solid rgba(255,215,0,0.35);
   padding: 25px;
   border-radius: 18px;
   text-align: center;
-  position: relative;
-  overflow: hidden;
-
-  opacity: 0;
-  transform: translateY(30px);
-
-  animation: entry 1s ease forwards, floatBox 4s ease-in-out infinite 1.2s;
-}
-
-@keyframes entry {
-  from {
-    opacity: 0;
-    transform: translateY(40px) scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
+  animation: floatBox 4s ease-in-out infinite;
 }
 
 @keyframes floatBox {
@@ -178,21 +160,7 @@ body::before {
   50% { transform: translateY(-10px); }
 }
 
-/* GLOW */
-.featured-box::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at top, rgba(255,215,0,0.25), transparent 65%);
-  animation: glowPulse 2.5s infinite;
-}
-
-@keyframes glowPulse {
-  0%,100% { opacity: 0.3; }
-  50% { opacity: 0.9; }
-}
-
-/* JOIN */
+/* BUTTON */
 .join-btn {
   padding: 14px 28px;
   border: 2px solid #ffd700;
@@ -201,8 +169,7 @@ body::before {
   text-decoration: none;
 }
 
-/* ================= OVERLAYS ================= */
-
+/* OVERLAYS */
 .overlay {
   position: fixed;
   inset: 0;
@@ -232,12 +199,7 @@ body::before {
   cursor: pointer;
 }
 
-/* LEADERBOARD */
-.leaderboard {
-  margin-top: 20px;
-  text-align: center;
-}
-
+/* LEADERBOARD BUTTON */
 .lb-btn {
   margin-top: 15px;
   display: inline-block;
@@ -248,7 +210,7 @@ body::before {
   border-radius: 10px;
 }
 
-/* OVERLAY TABLE */
+/* TABLE */
 table {
   width: 100%;
   border-collapse: collapse;
@@ -265,7 +227,6 @@ td, th {
 
 <body>
 
-<!-- NAV -->
 <div class="navbar">
   <h2>OLYMPUS</h2>
   <div class="menu-toggle" onclick="toggleMenu()">☰</div>
@@ -277,13 +238,11 @@ td, th {
   </div>
 </div>
 
-<!-- HERO -->
 <div class="hero">
   <img src="logo.png">
   <h2>Olympus R6 League</h2>
 </div>
 
-<!-- MATCH / PLAYER OF WEEK -->
 <div class="section">
   <h2>Match of the Week</h2>
   <div class="featured-box">Phantom vs Eclipse</div>
@@ -294,31 +253,18 @@ td, th {
   <div class="featured-box">AceStorm — MVP</div>
 </div>
 
-<!-- ABOUT -->
 <div class="section">
   <h2>About Olympus</h2>
   <div class="cards">
-    <div class="card" onclick="openOverlay('Competitive Play','Structured Tier 3 league built for rising talent and disciplined team competition.')">Competitive Play</div>
-    <div class="card" onclick="openOverlay('Exposure','Teams get stats, highlights, and scouting visibility across the league.')">Team Exposure</div>
+    <div class="card" onclick="openOverlay('Competitive Play','Structured Tier 3 competition for rising teams.')">
+      Competitive Play
+    </div>
+    <div class="card" onclick="openOverlay('Team Exposure','Teams are scouted through stats, highlights, and performance tracking.')">
+      Team Exposure
+    </div>
   </div>
 </div>
 
-<!-- LEADERBOARD -->
-<div class="section leaderboard">
-  <h2>Leaderboard</h2>
-
-  <table>
-    <tr><th>Team</th><th>Pts</th></tr>
-    <tr><td>Phantom</td><td>18</td></tr>
-    <tr><td>Eclipse</td><td>16</td></tr>
-    <tr><td>Nova</td><td>15</td></tr>
-    <tr><td>Apex</td><td>14</td></tr>
-  </table>
-
-  <div class="lb-btn" onclick="openLB()">Show Full Standings</div>
-</div>
-
-<!-- JOIN -->
 <div class="section" style="text-align:center;">
   <h2>Join Olympus</h2>
   <a class="join-btn" href="#">Join Discord</a>
@@ -333,10 +279,29 @@ td, th {
   </div>
 </div>
 
+<!-- FIXED LEADERBOARD OVERLAY -->
 <div class="overlay" id="lbOverlay">
   <div class="overlay-content">
     <h2>Full Standings</h2>
-    <p>12 Team League System</p>
+
+    <table>
+      <tr><th>Team</th><th>Pts</th></tr>
+
+      <tr><td>Phantom</td><td>18</td></tr>
+      <tr><td>Eclipse</td><td>16</td></tr>
+      <tr><td>Nova</td><td>15</td></tr>
+      <tr><td>Apex</td><td>14</td></tr>
+      <tr><td>Vortex</td><td>13</td></tr>
+      <tr><td>Zenith</td><td>12</td></tr>
+      <tr><td>Inferno</td><td>11</td></tr>
+      <tr><td>Orbit</td><td>10</td></tr>
+      <tr><td>Reign</td><td>9</td></tr>
+      <tr><td>Strix</td><td>8</td></tr>
+      <tr><td>Helix</td><td>7</td></tr>
+      <tr><td>Obsidian</td><td>6</td></tr>
+
+    </table>
+
     <button class="close-btn" onclick="closeLB()">Close</button>
   </div>
 </div>

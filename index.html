@@ -52,9 +52,7 @@ body::before {
   z-index: 1000;
 }
 
-.navbar h2 {
-  color: #ffd700;
-}
+.navbar h2 { color: #ffd700; }
 
 .menu-toggle {
   font-size: 26px;
@@ -73,9 +71,7 @@ body::before {
   flex-direction: column;
 }
 
-.nav-links.active {
-  display: flex;
-}
+.nav-links.active { display: flex; }
 
 .nav-links a {
   padding: 12px;
@@ -83,18 +79,15 @@ body::before {
   text-decoration: none;
 }
 
-/* FADE IN (RESTORED) */
+/* FADE IN */
 .fade-in {
   opacity: 0;
   transform: translateY(25px);
-  animation: fadeIn 1.8s ease forwards;
+  animation: fadeIn 1.6s ease forwards;
 }
 
 @keyframes fadeIn {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .delay-1 { animation-delay: 0.3s; }
@@ -157,63 +150,43 @@ body::before {
   box-shadow: 0 0 25px rgba(255,215,0,0.25);
 }
 
-/* WEEK ANIMATION BOX (RESTORED STRONG VERSION) */
-.featured-box {
-  background: linear-gradient(135deg, rgba(255,215,0,0.12), rgba(0,0,0,0.8));
+/* =======================
+   🔥 BETTER WEEK ANIMATIONS
+======================= */
+
+/* MATCH OF THE WEEK (strong glow + pulse) */
+.match-week {
+  background: linear-gradient(135deg, rgba(255,215,0,0.15), rgba(0,0,0,0.85));
   border: 1px solid rgba(255,215,0,0.35);
   padding: 25px;
   border-radius: 18px;
   text-align: center;
-  animation: pulse 2.8s infinite ease-in-out;
-  box-shadow: 0 0 25px rgba(255,215,0,0.15);
+  animation: matchPulse 2.8s infinite;
+  position: relative;
+  overflow: hidden;
 }
 
-@keyframes pulse {
-  0%,100% { transform: scale(1); box-shadow: 0 0 15px rgba(255,215,0,0.1); }
-  50% { transform: scale(1.03); box-shadow: 0 0 35px rgba(255,215,0,0.25); }
+@keyframes matchPulse {
+  0%,100% { transform: scale(1); box-shadow: 0 0 10px rgba(255,215,0,0.15); }
+  50% { transform: scale(1.03); box-shadow: 0 0 40px rgba(255,215,0,0.35); }
 }
 
-/* LEADERBOARD (OLD STYLE RESTORED) */
-.leaderboard {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 15px;
+/* PLAYER OF THE WEEK (different style = energy glow) */
+.player-week {
+  background: linear-gradient(135deg, rgba(0,150,255,0.12), rgba(0,0,0,0.85));
+  border: 1px solid rgba(0,150,255,0.35);
+  padding: 25px;
+  border-radius: 18px;
+  text-align: center;
+  animation: playerFloat 3.2s infinite ease-in-out;
 }
 
-.team {
-  background: rgba(20,20,20,0.7);
-  padding: 15px;
-  border-radius: 14px;
-  border: 1px solid rgba(255,215,0,0.15);
-  transition: 0.3s;
+@keyframes playerFloat {
+  0%,100% { transform: translateY(0); box-shadow: 0 0 10px rgba(0,150,255,0.15); }
+  50% { transform: translateY(-10px); box-shadow: 0 0 35px rgba(0,150,255,0.35); }
 }
 
-.team:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 0 20px rgba(255,215,0,0.2);
-}
-
-.lb-btn {
-  margin-top: 15px;
-  padding: 12px 20px;
-  border: 2px solid #ffd700;
-  color: #ffd700;
-  background: transparent;
-  border-radius: 10px;
-  cursor: pointer;
-}
-
-/* BUTTON */
-.join-btn {
-  padding: 14px 28px;
-  border: 2px solid #ffd700;
-  color: #ffd700;
-  border-radius: 12px;
-  text-decoration: none;
-  display: inline-block;
-}
-
-/* OVERLAY */
+/* OVERLAY (ABOUT US FIXED BACK) */
 .overlay {
   position: fixed;
   inset: 0;
@@ -242,6 +215,20 @@ body::before {
   border-radius: 10px;
   cursor: pointer;
 }
+
+/* LEADERBOARD */
+.leaderboard {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 15px;
+}
+
+.team {
+  background: rgba(20,20,20,0.7);
+  padding: 15px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,215,0,0.15);
+}
 </style>
 </head>
 
@@ -264,40 +251,45 @@ body::before {
   <img src="logo.png">
 </div>
 
-<!-- MATCH -->
+<!-- MATCH OF THE WEEK -->
 <div class="section fade-in delay-2">
   <h2>Match of the Week</h2>
-  <div class="featured-box">Phantom vs Eclipse</div>
+  <div class="match-week">
+    Phantom vs Eclipse
+  </div>
 </div>
 
-<!-- PLAYER -->
+<!-- PLAYER OF THE WEEK -->
 <div class="section fade-in delay-2">
   <h2>Player of the Week</h2>
-  <div class="featured-box">AceStorm — MVP Performance</div>
+  <div class="player-week">
+    AceStorm — MVP Performance
+  </div>
 </div>
 
-<!-- LEADERBOARD RESTORED -->
+<!-- LEADERBOARD -->
 <div class="section fade-in delay-3">
   <h2>Leaderboard</h2>
-
   <div class="leaderboard">
     <div class="team">1. Phantom — 18 pts</div>
     <div class="team">2. Eclipse — 16 pts</div>
     <div class="team">3. Nova — 15 pts</div>
     <div class="team">4. Apex — 14 pts</div>
   </div>
-
-  <div style="text-align:center;">
-    <button class="lb-btn" onclick="openLB()">Show Full Standings</button>
-  </div>
 </div>
 
-<!-- ABOUT -->
+<!-- ABOUT (OVERLAYS BACK) -->
 <div class="section fade-in delay-3">
   <h2>About Olympus</h2>
+
   <div class="cards">
-    <div class="card">Competitive Tier 3 Play</div>
-    <div class="card">Team Exposure System</div>
+    <div class="card" onclick="openOverlay('Competitive Play','Structured Tier 3 Rainbow Six Siege competition focused on disciplined gameplay, fair rules, and improving rising teams.')">
+      Competitive Play
+    </div>
+
+    <div class="card" onclick="openOverlay('Team Exposure','Teams gain visibility through streamed matches, stats tracking, and featured spotlight coverage.')">
+      Team Exposure
+    </div>
   </div>
 </div>
 
@@ -308,11 +300,11 @@ body::before {
 </div>
 
 <!-- OVERLAY -->
-<div class="overlay" id="lbOverlay">
+<div class="overlay" id="overlay">
   <div class="overlay-content">
-    <h2>Full Standings</h2>
-    <p>All 12 teams visible here (kept simple version)</p>
-    <button class="close-btn" onclick="closeLB()">Close</button>
+    <h2 id="overlayTitle"></h2>
+    <p id="overlayText"></p>
+    <button class="close-btn" onclick="closeOverlay()">Close</button>
   </div>
 </div>
 
@@ -321,12 +313,14 @@ function toggleMenu() {
   document.getElementById("navMenu").classList.toggle("active");
 }
 
-function openLB() {
-  document.getElementById("lbOverlay").style.display = "flex";
+function openOverlay(title, text) {
+  document.getElementById("overlayTitle").innerText = title;
+  document.getElementById("overlayText").innerText = text;
+  document.getElementById("overlay").style.display = "flex";
 }
 
-function closeLB() {
-  document.getElementById("lbOverlay").style.display = "none";
+function closeOverlay() {
+  document.getElementById("overlay").style.display = "none";
 }
 </script>
 

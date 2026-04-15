@@ -84,7 +84,7 @@ body::before {
   text-decoration: none;
 }
 
-/* FADE */
+/* FADE SYSTEM */
 .fade {
   opacity: 0;
   transform: translateY(25px);
@@ -142,6 +142,28 @@ body::before {
   margin-bottom: 25px;
 }
 
+/* FEATURE BOXES (MATCH + PLAYER) */
+.featured-box {
+  background: linear-gradient(135deg, rgba(255,215,0,0.12), rgba(0,0,0,0.7));
+  border: 1px solid rgba(255,215,0,0.25);
+  padding: 24px;
+  border-radius: 18px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  animation: popIn 1s ease forwards, pulseGlow 3s infinite;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+@keyframes popIn {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulseGlow {
+  50% { box-shadow: 0 0 35px rgba(255,215,0,0.25); }
+}
+
 /* LEADERBOARD */
 .leaderboard {
   background: rgba(20,20,20,0.6);
@@ -165,8 +187,7 @@ body::before {
 .team { flex: 1; }
 .points { color: #ccc; }
 
-/* ================= BUTTON FIX (HERE) ================= */
-
+/* BUTTON FIX */
 .join-btn, .show-btn {
   display: inline-block;
   padding: 14px 30px;
@@ -177,18 +198,12 @@ body::before {
   margin-top: 10px;
   background: transparent;
 
-  /* FIXES FOR WHITE BUTTON ISSUE */
   appearance: none;
   -webkit-appearance: none;
   outline: none;
 
   font-weight: bold;
-  transition: 0.25s ease;
-}
-
-.show-btn {
-  background: transparent !important;
-  color: #ffd700 !important;
+  transition: 0.25s;
 }
 
 .join-btn:hover, .show-btn:hover {
@@ -258,8 +273,24 @@ body::before {
   <p>Where Tier 3 talent rises to the top.</p>
 </div>
 
-<!-- LEADERBOARD -->
+<!-- MATCH OF THE WEEK -->
 <div class="section fade delay-2">
+  <h2>Match of the Week</h2>
+  <div class="featured-box">
+    Phantom vs Eclipse — Sunday 8PM EST
+  </div>
+</div>
+
+<!-- PLAYER OF THE WEEK -->
+<div class="section fade delay-2">
+  <h2>Player of the Week</h2>
+  <div class="featured-box">
+    AceStorm — 38 Kills MVP Performance
+  </div>
+</div>
+
+<!-- LEADERBOARD -->
+<div class="section fade delay-3">
   <h2>Standings</h2>
   <div class="leaderboard" id="leaderboard"></div>
   <div style="text-align:center;">
@@ -268,7 +299,7 @@ body::before {
 </div>
 
 <!-- JOIN -->
-<div class="section fade delay-3" style="text-align:center;">
+<div class="section fade delay-4" style="text-align:center;">
   <h2>Join Olympus</h2>
   <a class="join-btn" href="https://discord.gg/Butq7VhNx">Join Discord</a>
 </div>

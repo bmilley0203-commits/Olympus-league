@@ -15,7 +15,7 @@
 
 body {
   background: radial-gradient(circle at top, #0d0d0d, #050505);
-  color: #ffd700; /* ONLY CHANGE: gold text */
+  color: white;
   overflow-x: hidden;
   opacity: 0;
   animation: pageIn 1.2s ease forwards;
@@ -52,13 +52,62 @@ body::before {
   padding: 18px 26px;
   position: sticky;
   top: 0;
-  background: rgba(10,10,10,0.75);
-  backdrop-filter: blur(14px);
-  border-bottom: 1px solid rgba(255,215,0,0.15);
+  background: rgba(10,10,10,0.92);
+  backdrop-filter: blur(18px);
+  border-bottom: 1px solid rgba(255,215,0,0.22);
+  z-index: 9999;
 }
 
-.navbar h2 { color: #ffd700; }
+/* =========================
+   OLYMPUS GOLD SWEEP INTRO
+   ========================= */
+.navbar h2 {
+  font-size: 22px;
+  letter-spacing: 5px;
+  font-weight: 900;
+  text-transform: uppercase;
+  position: relative;
+  display: inline-block;
 
+  background: linear-gradient(
+    90deg,
+    #b8860b,
+    #ffd700,
+    #fff2a6,
+    #ffd700,
+    #b8860b
+  );
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  animation: goldShine 4s linear infinite, goldIntro 1.2s ease forwards;
+  opacity: 0;
+
+  text-shadow: 0 0 12px rgba(255, 215, 0, 0.25);
+}
+
+/* moving gold shine */
+@keyframes goldShine {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 300% 50%; }
+}
+
+/* intro fade + sweep feel */
+@keyframes goldIntro {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+    filter: brightness(0.5);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: brightness(1);
+  }
+}
+
+/* NAV LINKS */
 .menu-toggle {
   font-size: 26px;
   cursor: pointer;
@@ -103,7 +152,7 @@ body::before {
 /* HERO */
 .hero {
   text-align: center;
-  padding: 90px 20px;
+  padding: 120px 20px 90px;
 }
 
 .hero img {
@@ -126,7 +175,7 @@ body::before {
 }
 
 .hero p {
-  color: #ffd700; /* made gold for consistency */
+  color: #bbb;
 }
 
 /* SECTION */
@@ -155,7 +204,6 @@ body::before {
   opacity: 0;
   transform: translateY(20px);
   transition: 0.4s ease;
-  color: #ffd700; /* gold text */
 }
 
 .featured-box::before {
@@ -214,8 +262,8 @@ body::before {
 }
 
 .rank { color: #ffd700; width: 30px; }
-.team { flex: 1; color: #ffd700; }
-.points { color: #ffd700; }
+.team { flex: 1; }
+.points { color: #ccc; }
 
 .join-btn, .show-btn {
   display: inline-block;
@@ -256,7 +304,6 @@ body::before {
   max-width: 450px;
   max-height: 70vh;
   overflow-y: auto;
-  color: #ffd700;
 }
 
 .overlay-row {
@@ -264,7 +311,6 @@ body::before {
   justify-content: space-between;
   padding: 10px;
   border-bottom: 1px solid rgba(255,215,0,0.1);
-  color: #ffd700;
 }
 
 .close-btn {

@@ -89,26 +89,6 @@ body::before {
   text-shadow: 0 0 12px rgba(255, 215, 0, 0.25);
 }
 
-/* GLOBAL GOLD HEADER SYSTEM (ADDED) */
-h1, h2 {
-  background: linear-gradient(
-    90deg,
-    #b8860b,
-    #ffd700,
-    #fff2a6,
-    #ffd700,
-    #b8860b
-  );
-  background-size: 300% 100%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
-
-  animation: goldShine 4s linear infinite;
-  font-weight: 900;
-}
-
 @keyframes goldShine {
   0% { background-position: 0% 50%; }
   100% { background-position: 300% 50%; }
@@ -191,6 +171,7 @@ h1, h2 {
 
 .hero h2 {
   font-size: 44px;
+  color: #ffd700;
 }
 
 .hero p {
@@ -206,6 +187,7 @@ h1, h2 {
 
 .section h2 {
   text-align: center;
+  color: #ffd700;
   margin-bottom: 25px;
 }
 
@@ -317,9 +299,10 @@ h1, h2 {
   <h2>OLYMPUS</h2>
   <div class="menu-toggle" onclick="toggleMenu()">☰</div>
   <div class="nav-links" id="navMenu">
-    <a href="#">Home</a>
-    <a href="#">Schedule</a>
-    <a href="#">Teams</a>
+    <a href="index.html">Home</a>
+    <a href="schedule.html">Schedule</a>
+    <a href="teams.html">Teams</a>
+    <a href="fame.html">Hall Fame</a>
   </div>
 </div>
 
@@ -331,17 +314,26 @@ h1, h2 {
 
 <div class="section fade delay-2">
   <h2>Match of the Week</h2>
-  <div class="featured-box">Phantom vs Eclipse — Sunday 8PM EST</div>
+  <div class="featured-box">
+    <div style="position:absolute;top:0;left:-120%;width:60%;height:100%;background:linear-gradient(120deg,transparent,rgba(255,215,0,0.35),transparent);transform:skewX(-20deg);animation:goldSweep 1.8s linear infinite;"></div>
+    Phantom vs Eclipse — Sunday 8PM EST
+  </div>
 </div>
 
 <div class="section fade delay-2">
   <h2>Player of the Week</h2>
-  <div class="featured-box">AceStorm — 20 Kills MVP Performance</div>
+  <div class="featured-box">
+    <div style="position:absolute;top:0;left:-120%;width:60%;height:100%;background:linear-gradient(120deg,transparent,rgba(255,215,0,0.35),transparent);transform:skewX(-20deg);animation:goldSweep 1.8s linear infinite;"></div>
+    AceStorm — 20 Kills MVP Performance
+  </div>
 </div>
 
 <div class="section fade delay-3">
   <h2>Standings</h2>
   <div class="leaderboard" id="leaderboard"></div>
+  <div style="text-align:center;">
+    <button class="show-btn" onclick="openBoard()">Show Full Standings</button>
+  </div>
 </div>
 
 <div class="section fade delay-4" style="text-align:center;">
@@ -349,10 +341,69 @@ h1, h2 {
   <a class="join-btn" href="https://discord.gg/2xsKgrESJ">Join Discord</a>
 </div>
 
+<div class="overlay" id="overlay">
+  <div class="overlay-content">
+    <h2 style="color:#ffd700;">Full Standings</h2>
+    <div id="fullBoard"></div>
+    <button class="close-btn" onclick="closeBoard()">Close</button>
+  </div>
+</div>
+
 <script>
+const teams = {
+  Phantom: 12,
+  Eclipse: 10,
+  Nova: 9,
+  Titan: 8,
+  Orion: 7,
+  Vortex: 6,
+  Apex: 5,
+  Zenith: 4,
+  Hydra: 3,
+  Ghost: 2,
+  Ember: 1,
+  Surge: 0
+};
+
+function renderTop4() {
+  const board = document.getElementById("leaderboard");
+  board.innerHTML = "";
+  Object.entries(teams).sort((a,b)=>b[1]-a[1]).slice(0,4)
+    .forEach((t,i)=>{
+      board.innerHTML += `
+        <div class="row">
+          <div class="rank">${i+1}</div>
+          <div class="team">${t[0]}</div>
+          <div class="points">${t[1]} pts</div>
+        </div>
+      `;
+    });
+}
+
+function openBoard() {
+  const full = document.getElementById("fullBoard");
+  full.innerHTML = "";
+  Object.entries(teams).sort((a,b)=>b[1]-a[1]).forEach((t,i)=>{
+    full.innerHTML += `
+      <div class="overlay-row">
+        <div>${i+1}</div>
+        <div>${t[0]}</div>
+        <div>${t[1]} pts</div>
+      </div>
+    `;
+  });
+  document.getElementById("overlay").style.display = "flex";
+}
+
+function closeBoard() {
+  document.getElementById("overlay").style.display = "none";
+}
+
 function toggleMenu() {
   document.getElementById("navMenu").classList.toggle("active");
 }
+
+window.addEventListener("load", renderTop4);  <!-- FIX ONLY CHANGE -->
 </script>
 
 </body>

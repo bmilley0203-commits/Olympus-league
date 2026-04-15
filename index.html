@@ -13,12 +13,25 @@
   font-family: Arial, sans-serif;
 }
 
+/* =========================
+   GLOBAL TEXT SYSTEM (NEW)
+========================= */
 body {
   background: radial-gradient(circle at top, #0d0d0d, #050505);
-  color: white;
+  color: #d6c27a;
   overflow-x: hidden;
   opacity: 0;
   animation: pageIn 1.2s ease forwards;
+}
+
+h2 {
+  background: linear-gradient(90deg, #b8860b, #ffd700, #fff2a6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+p {
+  color: rgba(214, 194, 122, 0.75);
 }
 
 @keyframes pageIn {
@@ -44,7 +57,7 @@ body::before {
   50% { transform: translate(2%, -2%); }
 }
 
-/* NAV */
+/* NAVBAR UPGRADE */
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -58,76 +71,19 @@ body::before {
   z-index: 9999;
 }
 
-/* OLYMPUS GOLD SWEEP INTRO */
 .navbar h2 {
-  font-size: 22px;
   letter-spacing: 5px;
   font-weight: 900;
   text-transform: uppercase;
-  position: relative;
-  display: inline-block;
-
-  background: linear-gradient(
-    90deg,
-    #b8860b,
-    #ffd700,
-    #fff2a6,
-    #ffd700,
-    #b8860b
-  );
-  background-size: 300% 100%;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-
-  animation: goldShine 4s linear infinite, goldIntro 1.2s ease forwards;
-  opacity: 0;
+  text-shadow: 0 0 12px rgba(255,215,0,0.25);
 }
-
-@keyframes goldShine {
-  0% { background-position: 0% 50%; }
-  100% { background-position: 300% 50%; }
-}
-
-@keyframes goldIntro {
-  0% { opacity: 0; transform: translateY(-10px); }
-  100% { opacity: 1; transform: translateY(0); }
-}
-
-/* NAV LINKS */
-.menu-toggle {
-  font-size: 26px;
-  cursor: pointer;
-  color: #ffd700;
-}
-
-.nav-links {
-  position: absolute;
-  top: 70px;
-  right: 20px;
-  width: 210px;
-  background: rgba(15,15,15,0.95);
-  border-radius: 14px;
-  display: none;
-  flex-direction: column;
-}
-
-.nav-links.active { display: flex; }
 
 .nav-links a {
-  padding: 12px;
-  color: #ffd700;
-  text-decoration: none;
+  transition: 0.2s;
 }
 
-/* FADE */
-.fade {
-  opacity: 0;
-  transform: translateY(25px);
-  animation: fadeUp 1.2s ease forwards;
-}
-
-@keyframes fadeUp {
-  to { opacity: 1; transform: translateY(0); }
+.nav-links a:hover {
+  text-shadow: 0 0 12px gold;
 }
 
 /* HERO */
@@ -136,85 +92,150 @@ body::before {
   padding: 120px 20px 90px;
 }
 
-.hero img {
-  width: 280px;
-  filter: drop-shadow(0 0 30px gold);
-  animation: float 3s ease-in-out infinite, glow 2.5s infinite;
-}
-
-/* STANDINGS UPGRADE (NEW) */
-.leaderboard {
-  background: linear-gradient(135deg, rgba(255,215,0,0.08), rgba(0,0,0,0.65));
-  border-radius: 18px;
-  overflow: hidden;
-  border: 1px solid rgba(255,215,0,0.25);
-  box-shadow: 0 0 40px rgba(255,215,0,0.08);
-}
-
-/* row becomes card-like */
-.row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 14px 18px;
-  border-bottom: 1px solid rgba(255,215,0,0.08);
-  transition: 0.25s ease;
+/* =========================
+   FEATURED BROADCAST CARDS
+========================= */
+.featured-box {
   position: relative;
+  background: linear-gradient(135deg, rgba(255,215,0,0.10), rgba(0,0,0,0.7));
+  border-radius: 18px;
+  padding: 26px;
+  border: 1px solid rgba(255,215,0,0.25);
+  overflow: hidden;
+  transition: 0.4s ease;
 }
 
-/* hover lift */
-.row:hover {
-  background: rgba(255,215,0,0.08);
-  transform: scale(1.02);
+/* rotating glow border */
+.featured-box::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  background: conic-gradient(from 0deg, transparent, gold, transparent);
+  animation: rotateGlow 6s linear infinite;
+  z-index: -1;
+  filter: blur(10px);
 }
 
-/* gold rank badge (NEW) */
-.rank {
+@keyframes rotateGlow {
+  to { transform: rotate(360deg); }
+}
+
+/* scan line */
+.featured-box::before {
+  content: "";
+  position: absolute;
+  top: -100%;
+  left: 0;
+  width: 100%;
+  height: 60%;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(255,215,0,0.15),
+    transparent
+  );
+  animation: scan 4s infinite;
+}
+
+@keyframes scan {
+  0% { top: -100%; }
+  50% { top: 100%; }
+  100% { top: 100%; }
+}
+
+.featured-box:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 60px rgba(255,215,0,0.25);
+}
+
+/* FEATURED TAG */
+.featured-tag {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: gold;
   color: black;
-  width: 34px;
-  height: 34px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  padding: 4px 10px;
+  font-size: 10px;
   font-weight: bold;
-  border-radius: 50%;
-  background: radial-gradient(circle, #ffd700, #b8860b);
-  box-shadow: 0 0 12px rgba(255,215,0,0.4);
+  border-radius: 6px;
 }
 
-/* team emphasis */
-.team {
-  flex: 1;
-  padding-left: 12px;
-  font-weight: bold;
-  letter-spacing: 0.5px;
-}
-
-/* points pill */
-.points {
-  color: #ffd700;
-  background: rgba(255,215,0,0.08);
-  padding: 6px 10px;
-  border-radius: 10px;
+/* =========================
+   LEADERBOARD UPGRADE
+========================= */
+.leaderboard {
+  background: rgba(20,20,20,0.6);
+  border-radius: 16px;
+  overflow: hidden;
   border: 1px solid rgba(255,215,0,0.2);
 }
 
-/* OVERLAY STANDINGS (NEW IMPROVED LOOK) */
-.overlay-row {
+.row {
   display: flex;
   justify-content: space-between;
-  padding: 12px;
-  margin-bottom: 8px;
-  border-radius: 10px;
-  background: rgba(255,215,0,0.06);
-  border: 1px solid rgba(255,215,0,0.15);
-  transition: 0.2s;
+  padding: 14px 18px;
+  border-bottom: 1px solid rgba(255,215,0,0.08);
+  opacity: 0;
+  transform: translateX(-20px);
+  animation: rowIn 0.6s forwards;
 }
 
-.overlay-row:hover {
-  transform: scale(1.02);
-  background: rgba(255,215,0,0.12);
+@keyframes rowIn {
+  to { opacity: 1; transform: translateX(0); }
 }
+
+/* stagger animation */
+.row:nth-child(1){ animation-delay:0.1s }
+.row:nth-child(2){ animation-delay:0.2s }
+.row:nth-child(3){ animation-delay:0.3s }
+.row:nth-child(4){ animation-delay:0.4s }
+
+/* TOP 3 GLOW */
+.row:nth-child(1) .rank { box-shadow: 0 0 15px gold; }
+.row:nth-child(2) .rank { box-shadow: 0 0 10px #c0c0c0; }
+.row:nth-child(3) .rank { box-shadow: 0 0 8px #cd7f32; }
+
+.rank { color: #ffd700; width: 30px; }
+.team { flex: 1; }
+.points { color: #ccc; }
+
+/* BUTTON PRESS EFFECT */
+.join-btn:active,
+.show-btn:active {
+  transform: scale(0.96);
+}
+
+/* OVERLAY */
+.overlay {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.75);
+  backdrop-filter: blur(12px);
+}
+
+.overlay-content {
+  background: rgba(20,20,20,0.95);
+  padding: 25px;
+  border-radius: 16px;
+  border: 1px solid rgba(255,215,0,0.25);
+  width: 90%;
+  max-width: 450px;
+}
+
+/* FLOAT ANIMATION */
+@keyframes floatSoft {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+.featured-box {
+  animation: floatSoft 6s ease-in-out infinite;
+}
+
 </style>
 </head>
 
@@ -236,35 +257,26 @@ body::before {
   <p>Where Tier 3 talent rises to the top.</p>
 </div>
 
+<!-- FEATURED CARDS -->
 <div class="section fade delay-2">
   <h2>Match of the Week</h2>
-  <div class="featured-box">Phantom vs Eclipse — Sunday 8PM EST</div>
+  <div class="featured-box">
+    <div class="featured-tag">FEATURED</div>
+    Phantom vs Eclipse — Sunday 8PM EST
+  </div>
 </div>
 
 <div class="section fade delay-2">
   <h2>Player of the Week</h2>
-  <div class="featured-box">AceStorm — 38 Kills MVP Performance</div>
+  <div class="featured-box">
+    <div class="featured-tag">FEATURED</div>
+    AceStorm — 38 Kills MVP Performance
+  </div>
 </div>
 
 <div class="section fade delay-3">
   <h2>Standings</h2>
   <div class="leaderboard" id="leaderboard"></div>
-  <div style="text-align:center;">
-    <button class="show-btn" onclick="openBoard()">Show Full Standings</button>
-  </div>
-</div>
-
-<div class="section fade delay-4" style="text-align:center;">
-  <h2>Join Olympus</h2>
-  <a class="join-btn" href="https://discord.gg/2xsKgrESJ">Join Discord</a>
-</div>
-
-<div class="overlay" id="overlay">
-  <div class="overlay-content">
-    <h2 style="color:#ffd700;">Full Standings</h2>
-    <div id="fullBoard"></div>
-    <button class="close-btn" onclick="closeBoard()">Close</button>
-  </div>
 </div>
 
 <script>
@@ -275,17 +287,13 @@ const teams = {
   Titan: 8,
   Orion: 7,
   Vortex: 6,
-  Apex: 5,
-  Zenith: 4,
-  Hydra: 3,
-  Ghost: 2,
-  Ember: 1,
-  Surge: 0
+  Apex: 5
 };
 
 function renderTop4() {
   const board = document.getElementById("leaderboard");
   board.innerHTML = "";
+
   Object.entries(teams)
     .sort((a,b)=>b[1]-a[1])
     .slice(0,4)
@@ -300,33 +308,12 @@ function renderTop4() {
     });
 }
 
-function openBoard() {
-  const full = document.getElementById("fullBoard");
-  full.innerHTML = "";
-  Object.entries(teams)
-    .sort((a,b)=>b[1]-a[1])
-    .forEach((t,i)=>{
-      full.innerHTML += `
-        <div class="overlay-row">
-          <div>${i+1}</div>
-          <div>${t[0]}</div>
-          <div>${t[1]} pts</div>
-        </div>
-      `;
-    });
-  document.getElementById("overlay").style.display = "flex";
-}
+renderTop4();
 
-function closeBoard() {
-  document.getElementById("overlay").style.display = "none";
-}
-
-function toggleMenu() {
+function toggleMenu(){
   document.getElementById("navMenu").classList.toggle("active");
 }
-
-renderTop4();
 </script>
 
 </body>
-</html>       
+</html>

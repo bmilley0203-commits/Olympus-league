@@ -54,8 +54,6 @@ body::before {
 
 .navbar h2 {
   color: #ffd700;
-  letter-spacing: 2px;
-  font-size: 20px;
 }
 
 /* MENU */
@@ -71,7 +69,6 @@ body::before {
   right: 20px;
   width: 210px;
   background: rgba(15,15,15,0.95);
-  border: 1px solid rgba(255,215,0,0.2);
   border-radius: 14px;
   display: none;
   flex-direction: column;
@@ -82,15 +79,15 @@ body::before {
 }
 
 .nav-links a {
-  padding: 12px 14px;
-  text-decoration: none;
+  padding: 12px;
   color: #ffd700;
+  text-decoration: none;
 }
 
 /* HERO */
 .hero {
   text-align: center;
-  padding: 100px 20px 70px;
+  padding: 100px 20px 60px;
 }
 
 .hero img {
@@ -110,14 +107,8 @@ body::before {
 }
 
 .hero h2 {
-  margin-top: 22px;
-  font-size: 44px;
   color: #ffd700;
-}
-
-.hero p {
-  color: #bbb;
-  margin-top: 10px;
+  font-size: 44px;
 }
 
 /* SECTIONS */
@@ -130,7 +121,7 @@ body::before {
 .section h2 {
   text-align: center;
   color: #ffd700;
-  margin-bottom: 25px;
+  margin-bottom: 20px;
 }
 
 /* CARDS */
@@ -142,53 +133,46 @@ body::before {
 
 .card {
   background: rgba(20,20,20,0.7);
-  border: 1px solid rgba(255,215,0,0.15);
-  padding: 20px;
   border-radius: 16px;
+  padding: 20px;
+  border: 1px solid rgba(255,215,0,0.15);
   cursor: pointer;
   transition: 0.3s;
 }
 
 .card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 0 30px rgba(255,215,0,0.25);
+  box-shadow: 0 0 25px rgba(255,215,0,0.25);
 }
 
-/* ================= FIXED ANIMATED WEEK BOX ================= */
+/* ================= WEEK BOX ANIMATION ================= */
 
 .featured-box {
   background: linear-gradient(135deg, rgba(255,215,0,0.12), rgba(0,0,0,0.8));
   border: 1px solid rgba(255,215,0,0.35);
-  padding: 28px;
+  padding: 25px;
   border-radius: 18px;
   text-align: center;
   position: relative;
   overflow: hidden;
 
-  /* ENTRY FIX (VISIBLE NOW) */
   opacity: 0;
-  transform: translateY(35px);
+  transform: translateY(30px);
 
-  animation:
-    entry 1.1s ease forwards,
-    floatBox 4s ease-in-out infinite 1.2s;
+  animation: entry 1s ease forwards, floatBox 4s ease-in-out infinite 1.2s;
 }
 
-/* ENTRY ANIMATION */
 @keyframes entry {
-  0% {
+  from {
     opacity: 0;
     transform: translateY(40px) scale(0.95);
-    filter: blur(6px);
   }
-  100% {
+  to {
     opacity: 1;
     transform: translateY(0) scale(1);
-    filter: blur(0);
   }
 }
 
-/* FLOAT */
 @keyframes floatBox {
   0%,100% { transform: translateY(0); }
   50% { transform: translateY(-10px); }
@@ -201,7 +185,6 @@ body::before {
   inset: 0;
   background: radial-gradient(circle at top, rgba(255,215,0,0.25), transparent 65%);
   animation: glowPulse 2.5s infinite;
-  pointer-events: none;
 }
 
 @keyframes glowPulse {
@@ -209,51 +192,84 @@ body::before {
   50% { opacity: 0.9; }
 }
 
-/* SHINE */
-.featured-box::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -120%;
-  width: 60%;
-  height: 100%;
-  background: linear-gradient(120deg, transparent, rgba(255,215,0,0.25), transparent);
-  animation: shine 3.8s infinite;
-  pointer-events: none;
-}
-
-@keyframes shine {
-  0% { left: -120%; }
-  60% { left: 120%; }
-  100% { left: 120%; }
-}
-
-/* BUTTON */
+/* JOIN */
 .join-btn {
-  display: inline-block;
-  padding: 14px 30px;
+  padding: 14px 28px;
   border: 2px solid #ffd700;
   color: #ffd700;
   border-radius: 12px;
   text-decoration: none;
-  transition: 0.3s;
-  font-weight: bold;
 }
 
-.join-btn:hover {
+/* ================= OVERLAYS ================= */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(10px);
+}
+
+.overlay-content {
+  background: rgba(20,20,20,0.95);
+  padding: 25px;
+  border-radius: 16px;
+  border: 1px solid rgba(255,215,0,0.25);
+  width: 90%;
+  max-width: 380px;
+  text-align: center;
+}
+
+.close-btn {
+  margin-top: 15px;
+  padding: 10px 18px;
   background: #ffd700;
-  color: black;
-  transform: scale(1.05);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+/* LEADERBOARD */
+.leaderboard {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.lb-btn {
+  margin-top: 15px;
+  display: inline-block;
+  padding: 10px 18px;
+  border: 2px solid #ffd700;
+  color: #ffd700;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+/* OVERLAY TABLE */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+td, th {
+  padding: 8px;
+  border-bottom: 1px solid rgba(255,215,0,0.2);
+  color: #ccc;
 }
 </style>
 </head>
 
 <body>
 
+<!-- NAV -->
 <div class="navbar">
   <h2>OLYMPUS</h2>
-  <div class="menu-toggle">☰</div>
-  <div class="nav-links">
+  <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+  <div class="nav-links" id="navMenu">
     <a href="#">Home</a>
     <a href="#">Hall of Fame</a>
     <a href="#">Schedule</a>
@@ -261,35 +277,45 @@ body::before {
   </div>
 </div>
 
+<!-- HERO -->
 <div class="hero">
   <img src="logo.png">
   <h2>Olympus R6 League</h2>
-  <p>Where Tier 3 talent rises to the top.</p>
 </div>
 
-<!-- MATCH OF THE WEEK -->
+<!-- MATCH / PLAYER OF WEEK -->
 <div class="section">
   <h2>Match of the Week</h2>
-  <div class="featured-box">
-    Phantom vs Eclipse — Sunday 8PM EST
-  </div>
+  <div class="featured-box">Phantom vs Eclipse</div>
 </div>
 
-<!-- PLAYER OF THE WEEK -->
 <div class="section">
   <h2>Player of the Week</h2>
-  <div class="featured-box">
-    AceStorm — MVP Performance (38 Kills)
-  </div>
+  <div class="featured-box">AceStorm — MVP</div>
 </div>
 
 <!-- ABOUT -->
 <div class="section">
   <h2>About Olympus</h2>
   <div class="cards">
-    <div class="card">Competitive Play</div>
-    <div class="card">Player Exposure</div>
+    <div class="card" onclick="openOverlay('Competitive Play','Structured Tier 3 league built for rising talent and disciplined team competition.')">Competitive Play</div>
+    <div class="card" onclick="openOverlay('Exposure','Teams get stats, highlights, and scouting visibility across the league.')">Team Exposure</div>
   </div>
+</div>
+
+<!-- LEADERBOARD -->
+<div class="section leaderboard">
+  <h2>Leaderboard</h2>
+
+  <table>
+    <tr><th>Team</th><th>Pts</th></tr>
+    <tr><td>Phantom</td><td>18</td></tr>
+    <tr><td>Eclipse</td><td>16</td></tr>
+    <tr><td>Nova</td><td>15</td></tr>
+    <tr><td>Apex</td><td>14</td></tr>
+  </table>
+
+  <div class="lb-btn" onclick="openLB()">Show Full Standings</div>
 </div>
 
 <!-- JOIN -->
@@ -297,6 +323,47 @@ body::before {
   <h2>Join Olympus</h2>
   <a class="join-btn" href="#">Join Discord</a>
 </div>
+
+<!-- OVERLAYS -->
+<div class="overlay" id="overlay">
+  <div class="overlay-content">
+    <h2 id="title"></h2>
+    <p id="text"></p>
+    <button class="close-btn" onclick="closeOverlay()">Close</button>
+  </div>
+</div>
+
+<div class="overlay" id="lbOverlay">
+  <div class="overlay-content">
+    <h2>Full Standings</h2>
+    <p>12 Team League System</p>
+    <button class="close-btn" onclick="closeLB()">Close</button>
+  </div>
+</div>
+
+<script>
+function toggleMenu() {
+  document.getElementById("navMenu").classList.toggle("active");
+}
+
+function openOverlay(t, txt) {
+  document.getElementById("title").innerText = t;
+  document.getElementById("text").innerText = txt;
+  document.getElementById("overlay").style.display = "flex";
+}
+
+function closeOverlay() {
+  document.getElementById("overlay").style.display = "none";
+}
+
+function openLB() {
+  document.getElementById("lbOverlay").style.display = "flex";
+}
+
+function closeLB() {
+  document.getElementById("lbOverlay").style.display = "none";
+}
+</script>
 
 </body>
 </html>

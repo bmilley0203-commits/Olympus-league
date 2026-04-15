@@ -360,17 +360,20 @@ const teams = {
   Surge: 0
 };
 
+function getSortedTeams() {
+  return Object.entries(teams).sort((a, b) => b[1] - a[1]);
+}
+
 function renderTop4() {
   const board = document.getElementById("leaderboard");
   board.innerHTML = "";
 
-  Object.entries(teams)
-    .sort((a,b)=>b[1]-a[1])
-    .slice(0,4)
-    .forEach((t,i)=>{
+  getSortedTeams()
+    .slice(0, 4)
+    .forEach((t, i) => {
       board.innerHTML += `
         <div class="row">
-          <div class="rank">${i+1}</div>
+          <div class="rank">${i + 1}</div>
           <div class="team">${t[0]}</div>
           <div class="points">${t[1]} pts</div>
         </div>
@@ -382,21 +385,18 @@ function openBoard() {
   const full = document.getElementById("fullBoard");
   full.innerHTML = "";
 
-  Object.entries(teams)
-    .sort((a,b)=>b[1]-a[1])
-    .forEach((t,i)=>{
-      full.innerHTML += `
-        <div class="overlay-row">
-          <div>${i+1}</div>
-          <div>${t[0]}</div>
-          <div>${t[1]} pts</div>
-        </div>
-      `;
-    });
+  getSortedTeams().forEach((t, i) => {
+    full.innerHTML += `
+      <div class="overlay-row">
+        <div>${i + 1}</div>
+        <div>${t[0]}</div>
+        <div>${t[1]} pts</div>
+      </div>
+    `;
+  });
 
   document.getElementById("overlay").style.display = "flex";
 }
-
 function closeBoard() {
   document.getElementById("overlay").style.display = "none";
 }

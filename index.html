@@ -15,7 +15,7 @@
 
 body {
   background: radial-gradient(circle at top, #0d0d0d, #050505);
-  color: white;
+  color: #ffd700; /* ONLY CHANGE: gold text */
   overflow-x: hidden;
   opacity: 0;
   animation: pageIn 1.2s ease forwards;
@@ -52,51 +52,17 @@ body::before {
   padding: 18px 26px;
   position: sticky;
   top: 0;
-  background: rgba(10,10,10,0.92);
-  backdrop-filter: blur(18px);
-  border-bottom: 1px solid rgba(255,215,0,0.22);
-  z-index: 9999;
+  background: rgba(10,10,10,0.75);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(255,215,0,0.15);
 }
 
-/* GOLD TEXT SYSTEM (APPLIED GLOBALLY) */
-body, p, div, a, span, button {
-  color: transparent;
-  background: linear-gradient(90deg, #b8860b, #ffd700, #fff2a6, #ffd700);
-  -webkit-background-clip: text;
-  background-clip: text;
-}
+.navbar h2 { color: #ffd700; }
 
-/* NAV TITLE SPECIAL GOLD SWEEP */
-.navbar h2 {
-  font-size: 22px;
-  letter-spacing: 5px;
-  font-weight: 900;
-  text-transform: uppercase;
-
-  background: linear-gradient(
-    90deg,
-    #b8860b,
-    #ffd700,
-    #fff2a6,
-    #ffd700,
-    #b8860b
-  );
-  background-size: 300% 100%;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-
-  animation: goldShine 4s linear infinite;
-}
-
-@keyframes goldShine {
-  0% { background-position: 0% 50%; }
-  100% { background-position: 300% 50%; }
-}
-
-/* NAV LINKS */
 .menu-toggle {
   font-size: 26px;
   cursor: pointer;
+  color: #ffd700;
 }
 
 .nav-links {
@@ -114,6 +80,7 @@ body, p, div, a, span, button {
 
 .nav-links a {
   padding: 12px;
+  color: #ffd700;
   text-decoration: none;
 }
 
@@ -136,7 +103,7 @@ body, p, div, a, span, button {
 /* HERO */
 .hero {
   text-align: center;
-  padding: 120px 20px 90px;
+  padding: 90px 20px;
 }
 
 .hero img {
@@ -153,6 +120,15 @@ body, p, div, a, span, button {
   50% { filter: drop-shadow(0 0 50px gold); }
 }
 
+.hero h2 {
+  font-size: 44px;
+  color: #ffd700;
+}
+
+.hero p {
+  color: #ffd700; /* made gold for consistency */
+}
+
 /* SECTION */
 .section {
   padding: 60px 20px;
@@ -162,6 +138,7 @@ body, p, div, a, span, button {
 
 .section h2 {
   text-align: center;
+  color: #ffd700;
   margin-bottom: 25px;
 }
 
@@ -174,6 +151,47 @@ body, p, div, a, span, button {
   text-align: center;
   position: relative;
   overflow: hidden;
+  animation: popIn 1s ease forwards, pulseGlow 3s infinite;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: 0.4s ease;
+  color: #ffd700; /* gold text */
+}
+
+.featured-box::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255,215,0,0.25),
+    transparent
+  );
+  transform: skewX(-20deg);
+  animation: shimmer 4s infinite;
+}
+
+@keyframes shimmer {
+  0% { left: -120%; }
+  50% { left: 120%; }
+  100% { left: 120%; }
+}
+
+@keyframes popIn {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulseGlow {
+  50% { box-shadow: 0 0 45px rgba(255,215,0,0.30); }
+}
+
+.featured-box:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 0 60px rgba(255,215,0,0.35);
 }
 
 /* LEADERBOARD */
@@ -195,20 +213,27 @@ body, p, div, a, span, button {
   background: rgba(255,215,0,0.06);
 }
 
-.rank { width: 30px; }
-.team { flex: 1; }
-.points { color: #ccc; }
+.rank { color: #ffd700; width: 30px; }
+.team { flex: 1; color: #ffd700; }
+.points { color: #ffd700; }
 
-/* BUTTONS */
 .join-btn, .show-btn {
   display: inline-block;
   padding: 14px 30px;
   border: 2px solid #ffd700;
+  color: #ffd700;
   border-radius: 12px;
   cursor: pointer;
   margin-top: 10px;
   background: transparent;
   font-weight: bold;
+  transition: 0.25s;
+}
+
+.join-btn:hover, .show-btn:hover {
+  background: #ffd700;
+  color: black;
+  transform: scale(1.05);
 }
 
 /* OVERLAY */
@@ -229,6 +254,9 @@ body, p, div, a, span, button {
   border: 1px solid rgba(255,215,0,0.25);
   width: 90%;
   max-width: 450px;
+  max-height: 70vh;
+  overflow-y: auto;
+  color: #ffd700;
 }
 
 .overlay-row {
@@ -236,6 +264,7 @@ body, p, div, a, span, button {
   justify-content: space-between;
   padding: 10px;
   border-bottom: 1px solid rgba(255,215,0,0.1);
+  color: #ffd700;
 }
 
 .close-btn {
@@ -281,11 +310,22 @@ body, p, div, a, span, button {
 <div class="section fade delay-3">
   <h2>Standings</h2>
   <div class="leaderboard" id="leaderboard"></div>
+  <div style="text-align:center;">
+    <button class="show-btn" onclick="openBoard()">Show Full Standings</button>
+  </div>
 </div>
 
 <div class="section fade delay-4" style="text-align:center;">
   <h2>Join Olympus</h2>
   <a class="join-btn" href="https://discord.gg/2xsKgrESJ">Join Discord</a>
+</div>
+
+<div class="overlay" id="overlay">
+  <div class="overlay-content">
+    <h2 style="color:#ffd700;">Full Standings</h2>
+    <div id="fullBoard"></div>
+    <button class="close-btn" onclick="closeBoard()">Close</button>
+  </div>
 </div>
 
 <script>
@@ -317,6 +357,29 @@ function renderTop4() {
         </div>
       `;
     });
+}
+
+function openBoard() {
+  const full = document.getElementById("fullBoard");
+  full.innerHTML = "";
+  Object.entries(teams).sort((a,b)=>b[1]-a[1]).forEach((t,i)=>{
+    full.innerHTML += `
+      <div class="overlay-row">
+        <div>${i+1}</div>
+        <div>${t[0]}</div>
+        <div>${t[1]} pts</div>
+      </div>
+    `;
+  });
+  document.getElementById("overlay").style.display = "flex";
+}
+
+function closeBoard() {
+  document.getElementById("overlay").style.display = "none";
+}
+
+function toggleMenu() {
+  document.getElementById("navMenu").classList.toggle("active");
 }
 
 renderTop4();

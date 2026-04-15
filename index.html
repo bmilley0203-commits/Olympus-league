@@ -1,4 +1,4 @@
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -18,10 +18,10 @@ body {
   color: white;
   overflow-x: hidden;
   opacity: 0;
-  animation: pageFade 1.2s ease forwards;
+  animation: pageIn 1.2s ease forwards;
 }
 
-@keyframes pageFade {
+@keyframes pageIn {
   to { opacity: 1; }
 }
 
@@ -31,10 +31,10 @@ body::before {
   position: fixed;
   inset: 0;
   background:
-    radial-gradient(circle at 15% 20%, rgba(255,215,0,0.12), transparent 35%),
-    radial-gradient(circle at 85% 30%, rgba(255,180,0,0.10), transparent 40%),
-    radial-gradient(circle at 50% 85%, rgba(255,215,0,0.08), transparent 45%);
-  filter: blur(20px);
+    radial-gradient(circle at 20% 20%, rgba(255,215,0,0.12), transparent 40%),
+    radial-gradient(circle at 80% 30%, rgba(255,170,0,0.10), transparent 45%),
+    radial-gradient(circle at 50% 80%, rgba(255,215,0,0.08), transparent 50%);
+  filter: blur(22px);
   animation: floatBg 12s ease-in-out infinite;
   z-index: -1;
 }
@@ -52,10 +52,9 @@ body::before {
   padding: 18px 26px;
   position: sticky;
   top: 0;
-  background: rgba(10,10,10,0.7);
+  background: rgba(10,10,10,0.75);
   backdrop-filter: blur(14px);
   border-bottom: 1px solid rgba(255,215,0,0.15);
-  z-index: 1000;
 }
 
 .navbar h2 { color: #ffd700; }
@@ -85,14 +84,15 @@ body::before {
   text-decoration: none;
 }
 
-/* FADE SYSTEM */
+/* ================= ANIMATION SYSTEM ================= */
+
 .fade {
   opacity: 0;
-  transform: translateY(20px);
-  animation: fadeIn 1.2s ease forwards;
+  transform: translateY(25px);
+  animation: fadeUp 1.2s ease forwards;
 }
 
-@keyframes fadeIn {
+@keyframes fadeUp {
   to { opacity: 1; transform: translateY(0); }
 }
 
@@ -118,7 +118,7 @@ body::before {
 }
 
 @keyframes glow {
-  50% { filter: drop-shadow(0 0 45px gold); }
+  50% { filter: drop-shadow(0 0 50px gold); }
 }
 
 .hero h2 {
@@ -130,7 +130,7 @@ body::before {
   color: #bbb;
 }
 
-/* SECTIONS */
+/* SECTION */
 .section {
   padding: 60px 20px;
   max-width: 1100px;
@@ -143,31 +143,43 @@ body::before {
   margin-bottom: 25px;
 }
 
-/* FEATURE BOX (MATCH + PLAYER) */
+/* MATCH + PLAYER BOX (FIXED ANIMATION) */
 .featured-box {
-  background: linear-gradient(135deg, rgba(255,215,0,0.10), rgba(0,0,0,0.7));
+  background: linear-gradient(135deg, rgba(255,215,0,0.12), rgba(0,0,0,0.7));
   border: 1px solid rgba(255,215,0,0.25);
-  padding: 22px;
+  padding: 24px;
   border-radius: 18px;
   text-align: center;
   position: relative;
   overflow: hidden;
-  animation: pulseGlow 3s infinite;
+
+  transform: translateY(20px);
+  opacity: 0;
+  animation: boxIn 1s ease forwards, pulseGlow 3s infinite;
+}
+
+@keyframes boxIn {
+  to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes pulseGlow {
-  0%,100% { box-shadow: 0 0 0 rgba(255,215,0,0); }
   50% { box-shadow: 0 0 35px rgba(255,215,0,0.25); }
 }
 
-.featured-title {
-  color: #ffd700;
-  font-size: 18px;
-  margin-bottom: 10px;
+.featured-box::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,215,0,0.2), transparent 60%);
+  animation: sweep 5s linear infinite;
 }
 
-.featured-text {
-  color: #ccc;
+@keyframes sweep {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 /* LEADERBOARD */
@@ -183,26 +195,26 @@ body::before {
   justify-content: space-between;
   padding: 14px 18px;
   border-bottom: 1px solid rgba(255,215,0,0.08);
+  transition: 0.2s;
 }
 
 .row:hover {
-  background: rgba(255,215,0,0.05);
+  background: rgba(255,215,0,0.06);
+  transform: scale(1.01);
 }
 
 .rank { color: #ffd700; width: 30px; }
 .team { flex: 1; }
 .points { color: #ccc; }
 
-/* BUTTONS */
+/* BUTTON */
 .join-btn, .show-btn {
   display: inline-block;
   padding: 14px 30px;
   border: 2px solid #ffd700;
   color: #ffd700;
   border-radius: 12px;
-  text-decoration: none;
   cursor: pointer;
-  background: transparent;
   margin-top: 10px;
 }
 
@@ -219,7 +231,7 @@ body::before {
   align-items: center;
   justify-content: center;
   background: rgba(0,0,0,0.75);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(12px);
 }
 
 .overlay-content {
@@ -228,12 +240,11 @@ body::before {
   border-radius: 16px;
   border: 1px solid rgba(255,215,0,0.25);
   width: 90%;
-  max-width: 420px;
+  max-width: 450px;
   max-height: 70vh;
   overflow-y: auto;
 }
 
-/* fade rows in overlay */
 .overlay-row {
   display: flex;
   justify-content: space-between;
@@ -241,7 +252,6 @@ body::before {
   border-bottom: 1px solid rgba(255,215,0,0.1);
 }
 
-/* close */
 .close-btn {
   margin-top: 15px;
   padding: 10px 18px;
@@ -262,7 +272,6 @@ body::before {
   <div class="menu-toggle" onclick="toggleMenu()">☰</div>
   <div class="nav-links" id="navMenu">
     <a href="#">Home</a>
-    <a href="#">Hall of Fame</a>
     <a href="#">Schedule</a>
     <a href="#">Teams</a>
   </div>
@@ -279,8 +288,8 @@ body::before {
 <div class="section fade delay-2">
   <h2>Match of the Week</h2>
   <div class="featured-box">
-    <div class="featured-title">Phantom vs Eclipse</div>
-    <div class="featured-text">Sunday 8PM EST — High Stakes Match</div>
+    Phantom vs Eclipse<br>
+    Sunday 8PM EST
   </div>
 </div>
 
@@ -288,21 +297,12 @@ body::before {
 <div class="section fade delay-2">
   <h2>Player of the Week</h2>
   <div class="featured-box">
-    <div class="featured-title">AceStorm</div>
-    <div class="featured-text">38 Kills • MVP Performance</div>
+    AceStorm — 38 Kills MVP
   </div>
 </div>
 
-<!-- ABOUT -->
-<div class="section fade delay-3">
-  <h2>About Olympus</h2>
-  <p style="text-align:center;color:#bbb;">
-    Competitive Tier 3 Rainbow Six Siege league focused on structured gameplay and team exposure.
-  </p>
-</div>
-
 <!-- LEADERBOARD -->
-<div class="section fade delay-4">
+<div class="section fade delay-3">
   <h2>Standings</h2>
   <div class="leaderboard" id="leaderboard"></div>
   <div style="text-align:center;">
@@ -313,7 +313,7 @@ body::before {
 <!-- JOIN -->
 <div class="section fade delay-4" style="text-align:center;">
   <h2>Join Olympus</h2>
-  <a class="join-btn" href="https://discord.gg/Butq7VhNx" target="_blank">Join Discord</a>
+  <a class="join-btn" href="https://discord.gg/Butq7VhNx">Join Discord</a>
 </div>
 
 <!-- OVERLAY -->
@@ -327,33 +327,19 @@ body::before {
 
 <script>
 const teams = {
-  Phantom: 0,
-  Eclipse: 0,
-  Nova: 0,
-  Titan: 0,
-  Orion: 0,
-  Vortex: 0,
-  Apex: 0
+  Phantom: 12,
+  Eclipse: 10,
+  Nova: 9,
+  Titan: 8,
+  Orion: 7,
+  Vortex: 6,
+  Apex: 5,
+  Zenith: 4,
+  Hydra: 3,
+  Ghost: 2,
+  Ember: 1,
+  Surge: 0
 };
-
-const matches = [
-  { winner:"Phantom", status:"played" },
-  { winner:"Nova", status:"played" },
-  { winner:"Nova", status:"played" },
-  { winner:"Vortex", status:"played" }
-];
-
-function calculate() {
-  for (let t in teams) teams[t] = 0;
-
-  matches.forEach(m => {
-    if (m.status === "played") {
-      teams[m.winner] += 3;
-    }
-  });
-
-  renderTop4();
-}
 
 function renderTop4() {
   const board = document.getElementById("leaderboard");
@@ -400,7 +386,7 @@ function toggleMenu() {
   document.getElementById("navMenu").classList.toggle("active");
 }
 
-calculate();
+renderTop4();
 </script>
 
 </body>

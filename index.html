@@ -44,7 +44,7 @@ body::before {
   50% { transform: translate(2%, -2%); }
 }
 
-/* NAV - FIXED */
+/* NAV */
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -58,8 +58,56 @@ body::before {
   z-index: 9999;
 }
 
-.navbar h2 { color: #ffd700; }
+/* =========================
+   OLYMPUS GOLD SWEEP INTRO
+   ========================= */
+.navbar h2 {
+  font-size: 22px;
+  letter-spacing: 5px;
+  font-weight: 900;
+  text-transform: uppercase;
+  position: relative;
+  display: inline-block;
 
+  background: linear-gradient(
+    90deg,
+    #b8860b,
+    #ffd700,
+    #fff2a6,
+    #ffd700,
+    #b8860b
+  );
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  animation: goldShine 4s linear infinite, goldIntro 1.2s ease forwards;
+  opacity: 0;
+
+  text-shadow: 0 0 12px rgba(255, 215, 0, 0.25);
+}
+
+/* moving gold shine */
+@keyframes goldShine {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 300% 50%; }
+}
+
+/* intro fade + sweep feel */
+@keyframes goldIntro {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+    filter: brightness(0.5);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: brightness(1);
+  }
+}
+
+/* NAV LINKS */
 .menu-toggle {
   font-size: 26px;
   cursor: pointer;
@@ -101,7 +149,7 @@ body::before {
 .delay-3 { animation-delay: 0.8s; }
 .delay-4 { animation-delay: 1.1s; }
 
-/* HERO - FIXED SPACING */
+/* HERO */
 .hero {
   text-align: center;
   padding: 120px 20px 90px;

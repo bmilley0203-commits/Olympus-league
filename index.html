@@ -38,7 +38,7 @@ body::before {
   50% { transform: translate(2%, -2%); }
 }
 
-/* NAV */
+/* NAVBAR (RESTORED MENU) */
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -49,9 +49,13 @@ body::before {
   background: rgba(10,10,10,0.7);
   backdrop-filter: blur(14px);
   border-bottom: 1px solid rgba(255,215,0,0.15);
+  z-index: 1000;
 }
 
-.navbar h2 { color: #ffd700; }
+.navbar h2 {
+  color: #ffd700;
+  letter-spacing: 2px;
+}
 
 .menu-toggle {
   font-size: 26px;
@@ -68,6 +72,7 @@ body::before {
   border-radius: 14px;
   display: none;
   flex-direction: column;
+  border: 1px solid rgba(255,215,0,0.2);
 }
 
 .nav-links.active { display: flex; }
@@ -133,15 +138,50 @@ body::before {
   padding: 20px;
   border-radius: 16px;
   cursor: pointer;
+  transition: 0.3s;
 }
 
-/* MATCH */
-.featured {
-  background: rgba(255,215,0,0.06);
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 0 30px rgba(255,215,0,0.25);
+}
+
+/* MATCH / PLAYER OF WEEK (UPGRADED) */
+.featured-box {
+  background: linear-gradient(135deg, rgba(255,215,0,0.10), rgba(0,0,0,0.7));
   border: 1px solid rgba(255,215,0,0.25);
-  padding: 20px;
-  border-radius: 16px;
+  padding: 22px;
+  border-radius: 18px;
   text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.featured-box::before {
+  content: "";
+  position: absolute;
+  inset: -50%;
+  background: radial-gradient(circle, rgba(255,215,0,0.12), transparent 60%);
+  animation: glowMove 6s linear infinite;
+}
+
+@keyframes glowMove {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.featured-title {
+  color: #ffd700;
+  font-size: 18px;
+  margin-bottom: 10px;
+  position: relative;
+  z-index: 1;
+}
+
+.featured-text {
+  color: #ccc;
+  position: relative;
+  z-index: 1;
 }
 
 /* LEADERBOARD */
@@ -167,7 +207,7 @@ body::before {
 .team { flex: 1; }
 .points { color: #ccc; }
 
-/* BUTTON */
+/* JOIN */
 .join-btn {
   display: inline-block;
   padding: 14px 30px;
@@ -205,21 +245,54 @@ body::before {
 
 <body>
 
+<!-- NAVBAR -->
 <div class="navbar">
   <h2>OLYMPUS</h2>
+  <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+  <div class="nav-links" id="navMenu">
+    <a href="#">Home</a>
+    <a href="#">Hall of Fame</a>
+    <a href="#">Schedule</a>
+    <a href="#">Teams</a>
+  </div>
 </div>
 
+<!-- HERO -->
 <div class="hero">
   <img src="logo.png">
   <h2>Olympus R6 League</h2>
   <p>Where Tier 3 talent rises to the top.</p>
 </div>
 
-<!-- MATCH OF WEEK -->
+<!-- MATCH OF THE WEEK -->
 <div class="section">
   <h2>Match of the Week</h2>
-  <div class="featured">
-    Phantom vs Eclipse — Sunday 8PM EST
+  <div class="featured-box">
+    <div class="featured-title">Phantom vs Eclipse</div>
+    <div class="featured-text">Sunday 8PM EST — High stakes playoff race matchup</div>
+  </div>
+</div>
+
+<!-- PLAYER OF THE WEEK -->
+<div class="section">
+  <h2>Player of the Week</h2>
+  <div class="featured-box">
+    <div class="featured-title">AceStorm (Phantom)</div>
+    <div class="featured-text">38 kills • 1.9 KD • Match MVP performance</div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<div class="section">
+  <h2>About Olympus</h2>
+  <div class="cards">
+    <div class="card" onclick="openOverlay('Competitive Integrity','Structured Tier 3 Rainbow Six Siege league built for disciplined team play and real competitive growth.')">
+      Competitive Play
+    </div>
+
+    <div class="card" onclick="openOverlay('Team Exposure','We highlight full teams, not just players. Organizations gain visibility through stats, streams, and featured match coverage across the league.')">
+      Team Exposure
+    </div>
   </div>
 </div>
 
@@ -229,11 +302,13 @@ body::before {
   <div class="leaderboard" id="leaderboard"></div>
 </div>
 
-<!-- SCRIPTS -->
+<!-- JOIN -->
+<div class="section" style="text-align:center;">
+  <h2>Join Olympus</h2>
+  <a class="join-btn" href="https://discord.gg/Butq7VhNx" target="_blank">Join Discord</a>
+</div>
+
 <script>
-/* =======================
-   TEAMS (AUTO STANDINGS)
-======================= */
 const teams = {
   "Phantom": 0,
   "Eclipse": 0,
@@ -241,55 +316,66 @@ const teams = {
   "Titan": 0
 };
 
-/* =======================
-   MATCHES (EDIT THIS)
-======================= */
 const matches = [
-  { teamA: "Phantom", teamB: "Eclipse", winner: "Phantom", status: "played" },
-  { teamA: "Nova", teamB: "Titan", winner: "Nova", status: "played" },
-  { teamA: "Phantom", teamB: "Nova", winner: "Nova", status: "played" },
+  { teamA:"Phantom", teamB:"Eclipse", winner:"Phantom", status:"played" },
+  { teamA:"Nova", teamB:"Titan", winner:"Nova", status:"played" },
+  { teamA:"Phantom", teamB:"Nova", winner:"Nova", status:"played" }
 ];
 
-/* =======================
-   CALCULATE STANDINGS
-======================= */
-function calculateStandings() {
-
-  // reset
+function calculate() {
   for (let t in teams) teams[t] = 0;
 
   matches.forEach(m => {
     if (m.status === "played") {
-      teams[m.winner] += 3; // win = 3 points
+      teams[m.winner] += 3;
     }
   });
 
-  renderLeaderboard();
+  render();
 }
 
-/* =======================
-   RENDER LEADERBOARD
-======================= */
-function renderLeaderboard() {
+function render() {
   const board = document.getElementById("leaderboard");
   board.innerHTML = "";
 
-  const sorted = Object.entries(teams)
-    .sort((a,b) => b[1] - a[1]);
-
-  sorted.forEach((t, i) => {
-    board.innerHTML += `
-      <div class="row">
-        <div class="rank">${i+1}</div>
-        <div class="team">${t[0]}</div>
-        <div class="points">${t[1]} pts</div>
-      </div>
-    `;
-  });
+  Object.entries(teams)
+    .sort((a,b)=>b[1]-a[1])
+    .forEach((t,i)=>{
+      board.innerHTML += `
+        <div class="row">
+          <div class="rank">${i+1}</div>
+          <div class="team">${t[0]}</div>
+          <div class="points">${t[1]} pts</div>
+        </div>
+      `;
+    });
 }
 
-calculateStandings();
+function toggleMenu() {
+  document.getElementById("navMenu").classList.toggle("active");
+}
+
+function openOverlay(title,text){
+  document.getElementById("overlayTitle").innerText = title;
+  document.getElementById("overlayText").innerText = text;
+  document.getElementById("overlay").style.display = "flex";
+}
+
+function closeOverlay(){
+  document.getElementById("overlay").style.display = "none";
+}
+
+calculate();
 </script>
+
+<!-- OVERLAY -->
+<div class="overlay" id="overlay">
+  <div class="overlay-content">
+    <h2 id="overlayTitle"></h2>
+    <p id="overlayText"></p>
+    <button class="join-btn" onclick="closeOverlay()">Close</button>
+  </div>
+</div>
 
 </body>
 </html>

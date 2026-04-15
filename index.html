@@ -87,6 +87,17 @@ body::before {
   width: 260px; /* 🔥 BIGGER LOGO */
   filter: drop-shadow(0 0 25px gold);
 }
+  @keyframes glowSpin {
+  0% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(2deg) scale(1.03); }
+  100% { transform: rotate(0deg) scale(1); }
+}
+
+.hero img {
+  width: 260px;
+  filter: drop-shadow(0 0 25px gold);
+  animation: glowSpin 4s ease-in-out infinite;
+}
 
 .hero h2 {
   font-size: 42px;

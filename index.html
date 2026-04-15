@@ -58,6 +58,56 @@ body::before {
   z-index: 9999;
 }
 
+/* FIXED OLYMPUS TEXT ONLY */
+.navbar h2 {
+  font-size: 22px;
+  letter-spacing: 5px;
+  font-weight: 900;
+  text-transform: uppercase;
+  position: relative;
+  display: inline-block;
+
+  background: linear-gradient(
+    90deg,
+    #b8860b,
+    #ffd700,
+    #fff2a6,
+    #ffd700,
+    #b8860b
+  );
+  background-size: 300% 100%;
+
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+
+  animation: goldShine 4s linear infinite, goldIntro 1.2s ease forwards;
+  opacity: 0;
+
+  text-shadow: 0 0 12px rgba(255, 215, 0, 0.25);
+}
+
+@keyframes goldShine {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 300% 50%; }
+}
+
+@keyframes goldIntro {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+    filter: brightness(0.5);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: brightness(1);
+  }
+}
+
+/* NAV LINKS */
 .menu-toggle {
   font-size: 26px;
   cursor: pointer;
@@ -141,74 +191,16 @@ body::before {
   margin-bottom: 25px;
 }
 
-/* =========================
-   ONLY UPDATED SECTION
-   MATCH + PLAYER OF WEEK
-   ========================= */
-
+/* FEATURE BOXES */
 .featured-box {
   background: linear-gradient(135deg, rgba(255,215,0,0.12), rgba(0,0,0,0.7));
   border: 1px solid rgba(255,215,0,0.25);
   padding: 24px;
-  padding-top: 45px; /* space for badge */
   border-radius: 18px;
   text-align: center;
   position: relative;
   overflow: hidden;
   transition: 0.4s ease;
-}
-
-/* shimmer restored */
-.featured-box::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -120%;
-  width: 60%;
-  height: 100%;
-  background: linear-gradient(
-    120deg,
-    transparent,
-    rgba(255,215,0,0.25),
-    transparent
-  );
-  transform: skewX(-20deg);
-  animation: shimmer 4s infinite;
-  pointer-events: none;
-}
-
-@keyframes shimmer {
-  0% { left: -120%; }
-  50% { left: 120%; }
-  100% { left: 120%; }
-}
-
-/* featured glow */
-.featured-highlight {
-  border: 2px solid #ffd700;
-  box-shadow: 0 0 35px rgba(255,215,0,0.35);
-  animation: featuredGlow 2.5s infinite;
-}
-
-@keyframes featuredGlow {
-  0%,100% { box-shadow: 0 0 25px rgba(255,215,0,0.25); }
-  50% { box-shadow: 0 0 60px rgba(255,215,0,0.55); }
-}
-
-/* badge FIX (no overlap anymore) */
-.featured-badge {
-  position: absolute;
-  top: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: linear-gradient(90deg, #b8860b, #ffd700, #fff2a6);
-  color: black;
-  font-weight: bold;
-  font-size: 12px;
-  padding: 5px 12px;
-  border-radius: 8px;
-  letter-spacing: 1px;
-  box-shadow: 0 0 12px rgba(255,215,0,0.4);
 }
 
 /* LEADERBOARD */
@@ -312,22 +304,14 @@ body::before {
   <p>Where Tier 3 talent rises to the top.</p>
 </div>
 
-<!-- MATCH -->
 <div class="section fade delay-2">
   <h2>Match of the Week</h2>
-  <div class="featured-box featured-highlight">
-    <div class="featured-badge">FEATURED</div>
-    Phantom vs Eclipse — Sunday 8PM EST
-  </div>
+  <div class="featured-box">Phantom vs Eclipse — Sunday 8PM EST</div>
 </div>
 
-<!-- PLAYER -->
 <div class="section fade delay-2">
   <h2>Player of the Week</h2>
-  <div class="featured-box featured-highlight">
-    <div class="featured-badge">FEATURED</div>
-    AceStorm — 38 Kills MVP Performance
-  </div>
+  <div class="featured-box">AceStorm — 38 Kills MVP Performance</div>
 </div>
 
 <div class="section fade delay-3">

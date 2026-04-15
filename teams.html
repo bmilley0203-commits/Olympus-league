@@ -16,6 +16,7 @@
 body {
   background: radial-gradient(circle at top, #0d0d0d, #050505);
   color: white;
+  overflow-x: hidden;
 }
 
 /* ================= NAVBAR ================= */
@@ -30,12 +31,11 @@ body {
   backdrop-filter: blur(18px);
   border-bottom: 1px solid rgba(255,215,0,0.22);
   z-index: 9999;
-  height: 70px;
 }
 
-/* ✅ FIXED OLYMPUS TEXT SIZE */
+/* OLYMPUS GOLD */
 .navbar h2 {
-  font-size: 24px;
+  font-size: 22px;
   letter-spacing: 5px;
   font-weight: 900;
   text-transform: uppercase;
@@ -46,8 +46,6 @@ body {
   -webkit-text-fill-color: transparent;
 
   animation: goldShine 4s linear infinite;
-
-  line-height: 1;
 }
 
 @keyframes goldShine {
@@ -60,7 +58,6 @@ body {
   font-size: 26px;
   cursor: pointer;
   color: #ffd700;
-  line-height: 1;
 }
 
 .nav-links {
@@ -72,12 +69,9 @@ body {
   border-radius: 14px;
   display: none;
   flex-direction: column;
-  overflow: hidden;
 }
 
-.nav-links.active {
-  display: flex;
-}
+.nav-links.active { display: flex; }
 
 .nav-links a {
   padding: 12px;
@@ -85,51 +79,55 @@ body {
   text-decoration: none;
 }
 
-.nav-links a:hover {
-  background: rgba(255,215,0,0.08);
-}
-
-/* HEADER */
-header {
+/* HERO */
+.hero {
   text-align: center;
-  padding: 60px 20px 30px;
+  padding: 80px 20px;
 }
 
-header h1 {
+.hero h1 {
   font-size: 48px;
   letter-spacing: 4px;
 
   background: linear-gradient(90deg,#b8860b,#ffd700,#fff2a6,#ffd700,#b8860b);
-  background-size: 300% 100%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 
   animation: goldShine 4s linear infinite;
 }
 
-header p {
+.hero p {
   color: #bbb;
-  margin-top: 10px;
 }
 
 /* GRID */
-.container {
+.section {
+  padding: 50px 20px;
+}
+
+.section h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #ffd700;
+}
+
+/* TEAMS GRID */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 18px;
   max-width: 1100px;
   margin: auto;
-  padding: 20px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 20px;
 }
 
 /* TEAM CARD */
 .team-card {
-  background: linear-gradient(135deg, rgba(255,215,0,0.12), rgba(0,0,0,0.7));
+  background: linear-gradient(135deg, rgba(255,215,0,0.12), rgba(0,0,0,0.85));
   border: 1px solid rgba(255,215,0,0.25);
   border-radius: 16px;
-  padding: 25px;
+  padding: 18px;
   text-align: center;
-  transition: 0.3s ease;
+  transition: 0.3s;
 }
 
 .team-card:hover {
@@ -137,25 +135,26 @@ header p {
   box-shadow: 0 0 30px rgba(255,215,0,0.25);
 }
 
+/* LOGO SLOT */
 .team-card img {
-  width: 80px;
-  height: 80px;
+  width: 70px;
+  height: 70px;
   object-fit: contain;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
   filter: drop-shadow(0 0 10px rgba(255,215,0,0.4));
 }
 
-.team-card h2 {
-  font-size: 18px;
+/* TEAM NAME */
+.team-card h3 {
   color: #ffd700;
-  letter-spacing: 2px;
+  font-size: 14px;
 }
 </style>
 </head>
 
 <body>
 
-<!-- NAVBAR -->
+<!-- NAV -->
 <div class="navbar">
   <h2>OLYMPUS</h2>
   <div class="menu-toggle" onclick="toggleMenu()">☰</div>
@@ -168,33 +167,49 @@ header p {
   </div>
 </div>
 
-<header>
+<!-- HERO -->
+<div class="hero">
   <h1>TEAMS</h1>
-  <p>Olympus League Rosters</p>
-</header>
+  <p>Olympus Competitive Organizations</p>
+</div>
 
-<div class="container">
+<!-- TEAMS -->
+<div class="section">
+  <h2>Organizations</h2>
 
-  <div class="team-card">
-    <img src="logo.png">
-    <h2>PHANTOM</h2>
+  <div class="grid">
+
+    <div class="team-card"><img src="logo.png"><h3>Team Silenced</h3></div>
+    <div class="team-card"><img src="logo.png"><h3>Nitemare Esports</h3></div>
+    <div class="team-card"><img src="logo.png"><h3>Nightmare Fuel</h3></div>
+    <div class="team-card"><img src="logo.png"><h3>Hipfire Esports</h3></div>
+
+    <div class="team-card"><img src="logo.png"><h3>Calico & Co.</h3></div>
+    <div class="team-card"><img src="logo.png"><h3>Atlantis Esports</h3></div>
+    <div class="team-card"><img src="logo.png"><h3>Lunar S1</h3></div>
+    <div class="team-card"><img src="logo.png"><h3>Solaris Esports</h3></div>
+
+    <div class="team-card"><img src="logo.png"><h3>Left Lane</h3></div>
+    <div class="team-card"><img src="logo.png"><h3>Lunar Void</h3></div>
+    <div class="team-card"><img src="logo.png"><h3>Corsa Supreme</h3></div>
+    <div class="team-card"><img src="logo.png"><h3>Azalea Esports</h3></div>
+
+    <div class="team-card"><img src="logo.png"><h3>Yellow Jackets</h3></div>
+    <div class="team-card"><img src="logo.png"><h3>5 Sins</h3></div>
+    <div class="team-card"><img src="logo.png"><h3>sTx Zenith</h3></div>
+    <div class="team-card"><img src="logo.png"><h3>Outcast</h3></div>
+
+    <div class="team-card"><img src="logo.png"><h3>Highcaliber</h3></div>
+    <div class="team-card"><img src="logo.png"><h3>Infinite Esports</h3></div>
+    <div class="team-card"><img src="logo.png"><h3>Lunar Academy</h3></div>
+    <div class="team-card"><img src="logo.png"><h3>Landlocked Esports</h3></div>
+
+    <div class="team-card"><img src="logo.png"><h3>Castaways Comp</h3></div>
+    <div class="team-card"><img src="logo.png"><h3>Castaways Dev</h3></div>
+    <div class="team-card"><img src="logo.png"><h3>Team Tide</h3></div>
+    <div class="team-card"><img src="logo.png"><h3>Ridiculous Gaming</h3></div>
+
   </div>
-
-  <div class="team-card">
-    <img src="logo.png">
-    <h2>ECLIPSE</h2>
-  </div>
-
-  <div class="team-card">
-    <img src="logo.png">
-    <h2>NOVA</h2>
-  </div>
-
-  <div class="team-card">
-    <img src="logo.png">
-    <h2>TITAN</h2>
-  </div>
-
 </div>
 
 <script>

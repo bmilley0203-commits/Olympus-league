@@ -81,27 +81,20 @@ body::before {
   display: none;
   flex-direction: column;
   overflow: hidden;
-  transform: translateY(-10px);
-  opacity: 0;
-  transition: 0.25s ease;
 }
 
 .nav-links.active {
   display: flex;
-  transform: translateY(0);
-  opacity: 1;
 }
 
 .nav-links a {
   padding: 12px 14px;
   text-decoration: none;
   color: #ffd700;
-  transition: 0.2s;
 }
 
 .nav-links a:hover {
   background: rgba(255,215,0,0.1);
-  padding-left: 18px;
 }
 
 /* HERO */
@@ -115,6 +108,7 @@ body::before {
   display: inline-block;
 }
 
+/* spinning ring */
 .logo-wrapper::before {
   content: "";
   position: absolute;
@@ -128,17 +122,35 @@ body::before {
   to { transform: rotate(360deg); }
 }
 
+/* 🔥 LOGO FADE-IN + ANIMATION PATCH */
 .hero img {
   width: 280px;
   filter: drop-shadow(0 0 30px gold);
-  animation: float 3s ease-in-out infinite, glow 2.5s ease-in-out infinite;
+
+  /* intro state */
+  opacity: 0;
+  transform: translateY(20px) scale(0.95);
+
+  animation:
+    logoIntro 1s ease forwards,
+    float 3s ease-in-out 1s infinite,
+    glow 2.5s ease-in-out 1s infinite;
 }
 
+@keyframes logoIntro {
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* floating */
 @keyframes float {
   0%,100% { transform: translateY(0); }
   50% { transform: translateY(-12px); }
 }
 
+/* glow */
 @keyframes glow {
   0%,100% { filter: drop-shadow(0 0 15px gold); }
   50% { filter: drop-shadow(0 0 45px gold); }
@@ -148,7 +160,6 @@ body::before {
   margin-top: 22px;
   font-size: 44px;
   color: #ffd700;
-  letter-spacing: 1px;
 }
 
 .hero p {
@@ -188,22 +199,9 @@ body::before {
   overflow: hidden;
 }
 
-.card::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at top left, rgba(255,215,0,0.15), transparent 60%);
-  opacity: 0;
-  transition: 0.3s;
-}
-
 .card:hover {
   transform: translateY(-8px);
   box-shadow: 0 0 30px rgba(255,215,0,0.25);
-}
-
-.card:hover::before {
-  opacity: 1;
 }
 
 /* BUTTON */
@@ -243,12 +241,6 @@ body::before {
   width: 90%;
   max-width: 380px;
   text-align: center;
-  animation: pop 0.25s ease;
-}
-
-@keyframes pop {
-  from { transform: scale(0.9); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
 }
 
 .overlay-content h2 {
@@ -332,16 +324,6 @@ function openOverlay(title, text) {
 function closeOverlay() {
   document.getElementById("overlay").style.display = "none";
 }
-
-// close menu when clicking outside
-document.addEventListener("click", function(e) {
-  const menu = document.getElementById("navMenu");
-  const toggle = document.querySelector(".menu-toggle");
-
-  if (!menu.contains(e.target) && !toggle.contains(e.target)) {
-    menu.classList.remove("active");
-  }
-});
 </script>
 
 </body>

@@ -83,6 +83,25 @@ body::before {
   text-decoration: none;
 }
 
+/* ================= FADE IN SYSTEM (RESTORED) ================= */
+
+.fade-in {
+  opacity: 0;
+  transform: translateY(25px);
+  animation: fadeIn 1.8s ease forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.delay-1 { animation-delay: 0.3s; }
+.delay-2 { animation-delay: 0.6s; }
+.delay-3 { animation-delay: 0.9s; }
+
 /* HERO */
 .hero {
   text-align: center;
@@ -108,6 +127,10 @@ body::before {
 .hero h2 {
   color: #ffd700;
   font-size: 44px;
+}
+
+.hero p {
+  color: #bbb;
 }
 
 /* SECTIONS */
@@ -144,14 +167,26 @@ body::before {
   box-shadow: 0 0 25px rgba(255,215,0,0.25);
 }
 
-/* WEEK BOX ANIMATION */
+/* ================= MATCH + PLAYER OF WEEK (FIXED ANIMATION) ================= */
+
 .featured-box {
   background: linear-gradient(135deg, rgba(255,215,0,0.12), rgba(0,0,0,0.8));
   border: 1px solid rgba(255,215,0,0.35);
   padding: 25px;
   border-radius: 18px;
   text-align: center;
-  animation: floatBox 4s ease-in-out infinite;
+
+  opacity: 0;
+  transform: translateY(30px);
+
+  animation: entry 1s ease forwards, floatBox 4s ease-in-out infinite 1.2s;
+}
+
+@keyframes entry {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes floatBox {
@@ -226,7 +261,7 @@ td, th {
 
 <body>
 
-<div class="navbar">
+<div class="navbar fade-in">
   <h2>OLYMPUS</h2>
   <div class="menu-toggle" onclick="toggleMenu()">☰</div>
   <div class="nav-links" id="navMenu">
@@ -237,37 +272,41 @@ td, th {
   </div>
 </div>
 
-<div class="hero">
+<div class="hero fade-in delay-1">
   <img src="logo.png">
   <h2>Olympus R6 League</h2>
+  <p>Where Tier 3 talent rises to the top.</p>
 </div>
 
-<!-- WEEK -->
-<div class="section">
+<!-- MATCH -->
+<div class="section fade-in delay-2">
   <h2>Match of the Week</h2>
   <div class="featured-box">Phantom vs Eclipse</div>
 </div>
 
-<div class="section">
+<!-- PLAYER -->
+<div class="section fade-in delay-2">
   <h2>Player of the Week</h2>
-  <div class="featured-box">AceStorm — MVP</div>
+  <div class="featured-box">AceStorm — MVP Performance</div>
 </div>
 
 <!-- ABOUT -->
-<div class="section">
+<div class="section fade-in delay-3">
   <h2>About Olympus</h2>
+
   <div class="cards">
-    <div class="card" onclick="openOverlay('Competitive Play','Structured Tier 3 league focused on growth and teamwork.')">
+    <div class="card" onclick="openOverlay('Competitive Play','Structured Tier 3 league focused on teamwork, discipline, and rising talent development.')">
       Competitive Play
     </div>
-    <div class="card" onclick="openOverlay('Team Exposure','Teams gain visibility through stats, matches, and highlights.')">
+
+    <div class="card" onclick="openOverlay('Team Exposure','Teams are showcased through stats, highlights, and competitive scouting visibility.')">
       Team Exposure
     </div>
   </div>
 </div>
 
 <!-- JOIN -->
-<div class="section" style="text-align:center;">
+<div class="section fade-in delay-3" style="text-align:center;">
   <h2>Join Olympus</h2>
   <a class="join-btn" href="#">Join Discord</a>
 </div>
@@ -281,14 +320,13 @@ td, th {
   </div>
 </div>
 
-<!-- LEADERBOARD OVERLAY -->
+<!-- LEADERBOARD -->
 <div class="overlay" id="lbOverlay">
   <div class="overlay-content">
     <h2>Full Standings</h2>
 
     <table>
       <tr><th>Team</th><th>Pts</th></tr>
-
       <tr><td>Phantom</td><td>18</td></tr>
       <tr><td>Eclipse</td><td>16</td></tr>
       <tr><td>Nova</td><td>15</td></tr>

@@ -84,15 +84,21 @@ body::before {
 }
 
 .hero img {
-  width: 260px; /* 🔥 BIGGER LOGO */
-  filter: drop-shadow(0 0 25px gold);
+  width: 260px;
+  filter: drop-shadow(0 0 20px gold);
+  animation: logoFloat 3s ease-in-out infinite, glowPulse 2.5s ease-in-out infinite;
 }
-  @keyframes glowSpin {
-  0% { transform: rotate(0deg) scale(1); }
-  50% { transform: rotate(2deg) scale(1.03); }
-  100% { transform: rotate(0deg) scale(1); }
+@keyframes logoFloat {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+  100% { transform: translateY(0px); }
 }
 
+@keyframes glowPulse {
+  0% { filter: drop-shadow(0 0 15px gold); }
+  50% { filter: drop-shadow(0 0 35px gold); }
+  100% { filter: drop-shadow(0 0 15px gold); }
+}
 .hero img {
   width: 260px;
   filter: drop-shadow(0 0 25px gold);

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Olympus Teams</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background: radial-gradient(circle at top, #0d0d0d, #050505);
+  color: white;
+}
+
+/* HEADER */
+header {
+  text-align: center;
+  padding: 60px 20px 30px;
+}
+
+header h1 {
+  font-size: 48px;
+  letter-spacing: 4px;
+
+  background: linear-gradient(90deg,#b8860b,#ffd700,#fff2a6,#ffd700,#b8860b);
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  animation: goldShine 4s linear infinite;
+}
+
+@keyframes goldShine {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 300% 50%; }
+}
+
+header p {
+  color: #bbb;
+  margin-top: 10px;
+}
+
+/* GRID */
+.container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 20px;
+}
+
+/* TEAM CARD */
+.team-card {
+  background: linear-gradient(135deg, rgba(255,215,0,0.12), rgba(0,0,0,0.7));
+  border: 1px solid rgba(255,215,0,0.25);
+  border-radius: 16px;
+  padding: 25px;
+  text-align: center;
+  transition: 0.3s ease;
+}
+
+.team-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 0 30px rgba(255,215,0,0.25);
+}
+
+.team-card img {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  margin-bottom: 12px;
+  filter: drop-shadow(0 0 10px rgba(255,215,0,0.4));
+}
+
+.team-card h2 {
+  font-size: 18px;
+  color: #ffd700;
+  letter-spacing: 2px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>TEAMS</h1>
+  <p>Olympus League Rosters</p>
+</header>
+
+<div class="container">
+
+  <div class="team-card">
+    <img src="logo.png" alt="Team Logo">
+    <h2>PHANTOM</h2>
+  </div>
+
+  <div class="team-card">
+    <img src="logo.png" alt="Team Logo">
+    <h2>ECLIPSE</h2>
+  </div>
+
+  <div class="team-card">
+    <img src="logo.png" alt="Team Logo">
+    <h2>NOVA</h2>
+  </div>
+
+  <div class="team-card">
+    <img src="logo.png" alt="Team Logo">
+    <h2>TITAN</h2>
+  </div>
+
+</div>
+
+</body>
+</html>
